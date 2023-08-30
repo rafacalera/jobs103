@@ -1,0 +1,32 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    background-color: #E1E1FF;
+}
+
+body,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+h1 {
+    font-size: 78px;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+p {
+    color: #4F4F4F;
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 140%;
+}

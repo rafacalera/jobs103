@@ -1,0 +1,183 @@
+.teste {
+    background-color: lime;
+}
+
+.navbar {
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.navbar div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 180px;
+}
+
+.navbar li a {
+    color: #333;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 140%;
+    padding: 0.5rem 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.jobs103 {
+    font-size: 32px;
+    color: #2C4ECA;
+    font-weight: 700;
+}
+
+.btnMobile {
+    display: none;
+}
+
+.navCenterLinks {
+    display: flex;
+    align-items: flex-start;
+    gap: 42px;
+}
+
+.navRightButtons {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+}
+
+
+
+@media (max-width:1200px) {
+    .navRightButtons li a {
+        color: #2C4ECA;
+        font-weight: 500;
+    }
+
+    .aLogin {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+    }
+
+    .btnCadastroMenu {
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 140%;
+        display: block;
+        border-radius: 0;
+        background: none;
+    }
+
+    .btnMobile {
+        color: #2C4ECA;
+        font-weight: 700;
+        padding: .5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        display: flex;
+        gap: .5rem;
+    }
+
+    .hamb {
+
+        display: block;
+        width: 20px;
+        border-top: 2px solid;
+        margin-top: 2px;
+
+        color: #2C4ECA;
+    }
+
+
+    .hamb::after,
+    .hamb::before {
+        content: '';
+        display: block;
+        width: 20px;
+        height: px;
+        border-top: 2px solid;
+        color: #2C4ECA;
+        margin-top: 5px;
+        transition: .3s;
+        position: relative;
+    }
+
+    .navbar.active .hamb {
+        border-top-color: transparent;
+    }
+
+    .navbar.active .hamb::before {
+        transform: rotate(135deg);
+    }
+
+    .navbar.active .hamb::after {
+        transform: rotate(-135deg);
+        top: -7px;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 15px;
+    }
+
+    .navbar div ul {
+        display: block;
+    }
+
+    .navbar div {
+        display: block;
+        flex-grow: 0;
+        position: absolute;
+        width: 100%;
+        top: 70px;
+        right: 0px;
+        background-color: E1E1FF;
+        height: 0px;
+        transition: .6s;
+        z-index: 1000;
+        visibility: hidden;
+        overflow-y: hidden;
+    }
+
+    .navbar div ul li a {
+        padding: 1rem 0px;
+        margin: 0 1rem;
+    }
+
+
+    .navbar div ul li {
+        border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .vagas {
+        color: #333;
+        font-weight: 400;
+    }
+
+    .navbar div ul li:hover {
+        background-color: #CACAE6;
+    }
+
+    .navbar.active div {
+        height: 100vh;
+        visibility: visible;
+        overflow-y: auto;
+    }
+
+    .navbar.active div,
+    .navbar.active div ul {
+        display: block
+    }
+}

@@ -1,11 +1,18 @@
-import { useState } from "react";
+import react from "react";
+import Head from "next/head";
 
-function Home(){
-    return(
-        <div>
-            <h1>Home Page</h1>
-        </div>
-    )
+import Navbar from "../components/Navbar";
+
+export default () => {
+    return (
+        <>
+            <Head>
+                <title>Jobs-103</title>
+            </Head>
+            <header>
+                <Navbar />
+            </header>
+
+        </>
+    );
 }
-
-export default Home
