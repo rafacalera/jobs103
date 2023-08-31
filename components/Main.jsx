@@ -10,9 +10,7 @@ export default props => {
             <div className={props.menuController.isOpen ? {} : styles.herro} style={props.menuController.isOpen ? { display: "none" } : {}}>
                 <div>
                     <h1><span>Ache aqui seu</span> <span style={{ color: "#2C4ECA", fontWeight: "700px" }}>Emprego</span></h1>
-                    <p>Find You New Job Today! New Job Postings Everyday just for you, browse the
-                        job you want and apply
-                        wherever you want</p>
+                    <p>Seja você um estudante prestes a ingressar no mercado de trabalho ou alguém que está explorando diferentes carreiras, o Portal de Currículos Jobs-103 é o trampolim ideal para lançar-se em direção ao sucesso.</p>
                 </div>
                 <div>
                     <Image className={styles.imgSylvinho} src={sylvinho}
