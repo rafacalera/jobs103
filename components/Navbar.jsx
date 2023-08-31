@@ -1,14 +1,13 @@
-import React, { useState } from "react"
-import Image from 'next/image'
-import curriculumImg from '../assets/curriculum-icon.png'
-import styles from '../styles/Navbar.module.css'
+import React from "react"
+import Image from "next/image"
+import curriculumImg from "../assets/curriculum-icon.png"
+import styles from "../styles/Navbar.module.css"
 
-export default () => {
-    const [isOpen, setIsOpen] = useState(false);
+export default props => {
 
     return (
         <>
-            <nav className={isOpen ? `${styles.navbar} ${styles.active}` : styles.navbar}>
+            <nav className={props.menuController.isOpen ? `${styles.navbar} ${styles.active}` : styles.navbar}>
                 <a className={styles.logo} href="#">
                     <Image src={curriculumImg}
                         alt="curriculum-icon"
@@ -17,18 +16,18 @@ export default () => {
                     />
                     <span className={styles.jobs103}>Jobs-103</span>
                 </a>
-                <button className={styles.btnMobile} onClick={() => { setIsOpen(!isOpen) }}>Menu
+                <button className={styles.btnMobile} onClick={() => { props.menuController.setIsOpen(!props.menuController.isOpen) }}>Menu
                     <span className={styles.hamb} id="hamb"></span>
                 </button>
                 <div>
                     <ul className={styles.navCenterLinks}>
                         <li><a href="#">Home</a></li>
-                        <li><a style={isOpen ? {} : { color: "#2C4ECA", fontWeight: "700" }} href="#">Vagas</a></li>
+                        <li><a style={props.menuController.isOpen ? {} : { color: "#2C4ECA", fontWeight: "700" }} href="#">Vagas</a></li>
                         <li><a href="#">Currículo</a></li>
                     </ul>
                     <ul className={styles.navRightButtons}>
                         <li><a className={styles.aLogin} href="#">Login</a></li>
-                        <li><a style={isOpen ? {} :
+                        <li><a style={props.menuController.isOpen ? {} :
                             {
                                 color: "#FFFFFF",
                                 display: "flex",
@@ -38,7 +37,7 @@ export default () => {
                                 borderRadius: "31.5px",
                                 background: "#2C4ECA"
                             }
-                        } className={isOpen ? styles.btnCadastroMenu : ''} href="#">Cadastro</a></li>
+                        } className={props.menuController.isOpen ? styles.btnCadastroMenu : ''} href="#">Cadastro</a></li>
                     </ul>
                 </div>
             </nav >
