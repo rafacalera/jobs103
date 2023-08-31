@@ -61,7 +61,7 @@ export default props => {
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="tel:1633821226">
                                 <Image src={oldPhoneImg}
                                     alt="Old Phone Image"
                                     width={24}
