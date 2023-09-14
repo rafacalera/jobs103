@@ -28,10 +28,16 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
+    const [firstNameValue, setFirstName] = useState('')
+    const [birthDateValue, setBirthDate] = useState(null)
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        let date = birthDateValue
+
+        // Todo - Arrumar a data de nascimento e usar um controlador para cada textfield
+        data.append('birthDate', `${date.$y}-${date.$M + 1}-${date.$D}`)
         console.log({
             email: data.get('email'),
             password: data.get('password'),
@@ -67,6 +73,8 @@ export default function SignUp() {
                                 fullWidth
                                 id="firstName"
                                 label="Primeiro Nome"
+                                value={firstNameValue}
+                                onChange={(event) => setFirstName(event.target.value)}
                                 autoFocus
                             />
                         </Grid>
@@ -85,8 +93,14 @@ export default function SignUp() {
                                 required
                                 fullWidth
                                 id="birthDate"
-                                label="Data de Nascimento"
+                                label="Data de nascimento"
                                 name="birthDate"
+                                value={birthDateValue}
+                                onChange={(newValue) => {
+                                    setBirthDate(newValue)
+                                    console.log(newValue)
+                                }}
+                                autoComplete="off"
                             />
                         </Grid>
                         <Grid item xs={12}>

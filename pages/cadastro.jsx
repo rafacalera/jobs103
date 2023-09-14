@@ -20,7 +20,7 @@ export default props => {
             </Head>
 
             <Navbar menuController={menuController} login={true} />
-            <SignUp menuController={menuController} />
+            <SignUp/>
         </>
     )
 }
