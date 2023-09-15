@@ -5,7 +5,7 @@ import Head from "next/head";
 import SignUp from "../components/SignUp";
 
 
-export default props => {
+export default () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const menuController = {
@@ -20,7 +20,7 @@ export default props => {
             </Head>
 
             <Navbar menuController={menuController} login={true} />
-            <SignUp/>
+            <SignUp menuController={menuController} />
         </>
     )
 }

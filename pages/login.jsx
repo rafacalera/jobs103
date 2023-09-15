@@ -5,7 +5,7 @@ import Head from "next/head";
 import SignIn from "../components/SignIn";
 
 
-export default props => {
+export default () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const menuController = {

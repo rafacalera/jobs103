@@ -27,17 +27,20 @@ function Copyright(props) {
     );
 }
 
-export default function SignUp() {
+export default function SignUp(props) {
     const [firstNameValue, setFirstName] = useState('')
     const [birthDateValue, setBirthDate] = useState(null)
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        let date = birthDateValue
 
-        // Todo - Arrumar a data de nascimento e usar um controlador para cada textfield
-        data.append('birthDate', `${date.$y}-${date.$M + 1}-${date.$D}`)
+        let date = birthDateValue.$d
+        let ano = date.getFullYear();
+        let mes = (date.getMonth() + 1).toString().padStart(2, '0');
+        let dia = date.getDate().toString().padStart(2, '0');
+
+        data.append('birthDate', `${ano}-${mes}-${dia}`)
         console.log({
             email: data.get('email'),
             password: data.get('password'),
@@ -47,7 +50,7 @@ export default function SignUp() {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container style={props.menuController.isOpen ? { display: 'none' } : {}} component="main" maxWidth="xs">
             <CssBaseline />
             <Box
                 sx={{
