@@ -42,10 +42,11 @@ export default function SignUp(props) {
 
         data.append('birthDate', `${ano}-${mes}-${dia}`)
         console.log({
+            firstName: data.get('firstName'),
+            lastName: data.get('lastName'),
+            birthDate: data.get('birthDate'),
             email: data.get('email'),
             password: data.get('password'),
-            firstName: data.get('firstName'),
-            birthDate: data.get('birthDate')
         });
     };
 
@@ -86,7 +87,7 @@ export default function SignUp(props) {
                                 required
                                 fullWidth
                                 id="lastName"
-                                label="Segundo Nome"
+                                label="Sobrenome"
                                 name="lastName"
                                 autoComplete="family-name"
                             />
