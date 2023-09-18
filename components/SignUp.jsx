@@ -36,13 +36,70 @@ function Copyright(props) {
 }
 
 export default function SignUp(props) {
-  const [firstNameValue, setFirstName] = useState("");
+  const [fNameError, setFNameError] = useState("");
+  const [lNameError, setLNameError] = useState("");
+
   const [birthDateValue, setBirthDate] = useState(null);
-  const [gender, setGender] = useState("");
+  const [birthError, setBirthError] = useState("");
+
+  const [genderError, setGenderError] = useState("");
+
+  const [emailError, setEmailError] = useState("");
+  const [passError, setPassError] = useState("");
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    if (!data.get("firstName") || !data.get("firstName").trim().length) {
+      setFNameError("É preciso um Nome para continuar")
+      return false
+    }
+    else {
+      setFNameError("")
+    }
+
+    if (!data.get("lastName") || !data.get("lastName").trim().length) {
+      setLNameError("É preciso um Sobrenome para continuar")
+      return false
+    }
+    else {
+      setLNameError("")
+    }
+
+    if (birthDateValue === null || isNaN(birthDateValue.$D) || isNaN(birthDateValue.$M) || isNaN(birthDateValue.$y)) {
+      setBirthError("É preciso de uma Data válida para continuar")
+      return false
+    }
+    else {
+      setBirthError("")
+    }
+
+    if (!data.get("gender") || !data.get("gender").trim().length) {
+      setGenderError("É preciso um E-mail para continuar")
+      return false
+    }
+    else {
+      setGenderError("")
+    }
+
+    if (!data.get("email") || !data.get("email").trim().length) {
+      setEmailError("É preciso um E-mail para continuar")
+      return false
+    }
+    else {
+      setEmailError("")
+    }
+
+    if (!data.get("password") || !data.get("password").length) {
+      setPassError("É preciso uma Senha para continuar")
+      return false
+    }
+    else {
+      setPassError("")
+    }
 
     let date = birthDateValue.$d;
     let ano = date.getFullYear();
@@ -58,6 +115,8 @@ export default function SignUp(props) {
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    return true
   };
 
   return (
@@ -85,50 +144,57 @@ export default function SignUp(props) {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+                error={fNameError && fNameError.length ? true : false}
                 autoComplete="given-name"
                 name="firstName"
                 required
                 fullWidth
                 id="firstName"
                 label="Primeiro Nome"
-                value={firstNameValue}
-                onChange={(event) => setFirstName(event.target.value)}
                 autoFocus
+                helperText={fNameError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                error={lNameError && lNameError.length ? true : false}
                 required
                 fullWidth
                 id="lastName"
                 label="Sobrenome"
                 name="lastName"
                 autoComplete="family-name"
+                helperText={lNameError}
               />
             </Grid>
             <Grid item xs={12} sm={8}>
               <DatePicker
+                error={birthDateValue === null || isNaN(birthDateValue.$D) || isNaN(birthDateValue.$M) || isNaN(birthDateValue.$y)}
                 required
                 fullWidth
                 id="birthDate"
                 label="Data de nascimento"
                 name="birthDate"
                 value={birthDateValue}
-                onChange={(newValue) => {
-                  setBirthDate(newValue);
-                  console.log(newValue);
+                onChange={(newValue) => setBirthDate(newValue)}
+                slotProps={{
+                  textField: {
+                    helperText: birthError,
+                  },
                 }}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
               <TextField
+                error={genderError && genderError.length ? true : false}
+                required
                 id="gender"
                 name="gender"
                 label="Gênero"
-                value={gender}
-                onChange={(event) => setGender(event.target.value)}
+                defaultValue=""
                 select
                 fullWidth
+                helperText={genderError}
               >
                 <MenuItem value="M">
                   Masculino
@@ -143,16 +209,19 @@ export default function SignUp(props) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={emailError && emailError.length ? true : false}
                 required
                 fullWidth
                 id="email"
                 label="Seu E-mail"
                 name="email"
                 autoComplete="email"
+                helperText={emailError}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={passError && passError.length ? true : false}
                 required
                 fullWidth
                 name="password"
@@ -160,6 +229,7 @@ export default function SignUp(props) {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                helperText={passError}
               />
             </Grid>
             {/* <Grid item xs={12}>
