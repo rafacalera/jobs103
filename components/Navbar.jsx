@@ -8,7 +8,7 @@ export default props => {
     return (
         <>
             <nav className={props.menuController.isOpen ? `${styles.navbar} ${styles.active}` : styles.navbar}>
-                <a className={styles.logo} href="#">
+                <a className={styles.logo} href="/">
                     <Image src={curriculumImg}
                         alt="curriculum-icon"
                         width={32}
@@ -25,8 +25,8 @@ export default props => {
                         <li><a style={props.menuController.isOpen ? {} : { color: "#2C4ECA", fontWeight: "700" }} href="#">Vagas</a></li>
                         <li><a href="#">Currículo</a></li>
                     </ul>
-                    <ul className={styles.navRightButtons}>
-                        <li><a className={styles.aLogin} href="#">Login</a></li>
+                    <ul style={props.login ? { display: 'none' } : {}} className={styles.navRightButtons}>
+                        <li><a className={styles.aLogin} href="/login">Login</a></li>
                         <li><a style={props.menuController.isOpen ? {} :
                             {
                                 color: "#FFFFFF",
@@ -37,7 +37,7 @@ export default props => {
                                 borderRadius: "31.5px",
                                 background: "#2C4ECA"
                             }
-                        } className={props.menuController.isOpen ? styles.btnCadastroMenu : ''} href="#">Cadastro</a></li>
+                        } className={props.menuController.isOpen ? styles.btnCadastroMenu : ''} href="/cadastro">Cadastro</a></li>
                     </ul>
                 </div>
             </nav >
