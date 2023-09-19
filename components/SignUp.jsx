@@ -36,60 +36,82 @@ function Copyright(props) {
 }
 
 export default function SignUp(props) {
+  const [submitStage, setSubmitStage] = useState(false);
+
   const [fNameError, setFNameError] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [lNameError, setLNameError] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const [birthDateValue, setBirthDate] = useState(null);
   const [birthError, setBirthError] = useState("");
 
   const [genderError, setGenderError] = useState("");
+  const [gender, setGender] = useState("");
 
   const [emailError, setEmailError] = useState("");
+  const [email, setEmail] = useState("");
   const [passError, setPassError] = useState("");
+  const [password, setPassword] = useState("");
 
+  const [cepError, setCepError] = useState("");
 
+  const nextStage = (event) => {
+    setFNameError("");
+    setLNameError("");
+    setBirthError("");
+    setGenderError("");
+    setEmailError("");
+    setPassError("");
+
+    if (firstName.trim().length === 0) {
+      setFNameError("É preciso um Nome para continuar");
+      return false;
+    }
+
+    if (lastName.trim().length === 0) {
+      setLNameError("É preciso um Sobrenome para continuar");
+      return false;
+    }
+
+    if (
+      birthDateValue === null ||
+      isNaN(birthDateValue.$D) ||
+      isNaN(birthDateValue.$M) ||
+      isNaN(birthDateValue.$y)
+    ) {
+      setBirthError("É preciso de uma Data válida para continuar");
+      return false;
+    }
+
+    if (gender === "") {
+      setGenderError("Selecionar Gênero");
+      return false;
+    }
+
+    if (email.trim().length === 0) {
+      setEmailError("É preciso um E-mail para continuar");
+      return false;
+    }
+
+    if (password.length < 5) {
+      switch (password.length) {
+        case 0:
+          setPassError("Preencha a senha para continuar");
+          break;
+        default:
+          setPassError("Preencha com uma senha mais forte");
+      }
+      return false;
+    }
+
+    setSubmitStage(true);
+    return true;
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    setFNameError("")
-    setLNameError("")
-    setBirthError("")
-    setGenderError("")
-    setEmailError("")
-    setPassError("")
-
-
-    if (!data.get("firstName") || !data.get("firstName").trim().length) {
-      setFNameError("É preciso um Nome para continuar")
-      return false
-    }
-
-    if (!data.get("lastName") || !data.get("lastName").trim().length) {
-      setLNameError("É preciso um Sobrenome para continuar")
-      return false
-    }
-
-    if (birthDateValue === null || isNaN(birthDateValue.$D) || isNaN(birthDateValue.$M) || isNaN(birthDateValue.$y)) {
-      setBirthError("É preciso de uma Data válida para continuar")
-      return false
-    }
-
-    if (!data.get("gender") || !data.get("gender").trim().length) {
-      setGenderError("É preciso um E-mail para continuar")
-      return false
-    }
-
-    if (!data.get("email") || !data.get("email").trim().length) {
-      setEmailError("É preciso um E-mail para continuar")
-      return false
-    }
-
-    if (!data.get("password") || !data.get("password").length) {
-      setPassError("É preciso uma Senha para continuar")
-      return false
-    }
 
     let date = birthDateValue.$d;
     let ano = date.getFullYear();
@@ -105,8 +127,6 @@ export default function SignUp(props) {
       email: data.get("email"),
       password: data.get("password"),
     });
-
-    return true
   };
 
   return (
@@ -131,7 +151,11 @@ export default function SignUp(props) {
           Cadastre-se
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
+          <Grid
+            container
+            spacing={2}
+            style={submitStage ? { display: "none" } : {}}
+          >
             <Grid item xs={12} sm={6}>
               <TextField
                 error={fNameError && fNameError.length ? true : false}
@@ -141,6 +165,10 @@ export default function SignUp(props) {
                 fullWidth
                 id="firstName"
                 label="Primeiro Nome"
+                value={firstName}
+                onChange={(event) => {
+                  setFirstName(event.target.value);
+                }}
                 autoFocus
                 helperText={fNameError}
               />
@@ -153,15 +181,17 @@ export default function SignUp(props) {
                 id="lastName"
                 label="Sobrenome"
                 name="lastName"
+                value={lastName}
+                onChange={(event) => {
+                  setLastName(event.target.value);
+                }}
                 autoComplete="family-name"
                 helperText={lNameError}
               />
             </Grid>
             <Grid item xs={12} sm={8}>
               <DatePicker
-                error={birthDateValue === null || isNaN(birthDateValue.$D) || isNaN(birthDateValue.$M) || isNaN(birthDateValue.$y)}
                 required
-                fullWidth
                 id="birthDate"
                 label="Data de nascimento"
                 name="birthDate"
@@ -181,20 +211,17 @@ export default function SignUp(props) {
                 id="gender"
                 name="gender"
                 label="Gênero"
-                defaultValue=""
+                value={gender}
+                onChange={(event) => {
+                  setGender(event.target.value);
+                }}
                 select
                 fullWidth
                 helperText={genderError}
               >
-                <MenuItem value="M">
-                  Masculino
-                </MenuItem>
-                <MenuItem value="F">
-                  Feminino
-                </MenuItem>
-                <MenuItem value="F">
-                  Outro
-                </MenuItem>
+                <MenuItem value="M">Masculino</MenuItem>
+                <MenuItem value="F">Feminino</MenuItem>
+                <MenuItem value="O">Outros</MenuItem>
               </TextField>
             </Grid>
             <Grid item xs={12}>
@@ -205,6 +232,10 @@ export default function SignUp(props) {
                 id="email"
                 label="Seu E-mail"
                 name="email"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
                 autoComplete="email"
                 helperText={emailError}
               />
@@ -218,10 +249,15 @@ export default function SignUp(props) {
                 label="Sua senha"
                 type="password"
                 id="password"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
                 autoComplete="new-password"
                 helperText={passError}
               />
             </Grid>
+
             {/* <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Checkbox value="allowExtraEmails" color="primary" />}
@@ -229,14 +265,57 @@ export default function SignUp(props) {
                             />
                         </Grid> */}
           </Grid>
+          <Grid
+            container
+            spacing={2}
+            style={submitStage ? {} : { display: "none" }}
+          >
+            <Grid item xs={12} sm={4}>
+              <TextField
+                error={cepError && cepError.length ? true : false}
+                required
+                fullWidth
+                id="cep"
+                label="CEP"
+                name="cep"
+                autoComplete="cep"
+                helperText={emailError}
+              />
+            </Grid>
+          </Grid>
           <Button
-            type="submit"
+            onClick={nextStage}
+            style={submitStage ? { display: "none" } : {}}
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Cadastrar
+            Próximo
           </Button>
+          <Grid container spacing={2}>
+          <Grid item>
+              <Button
+                onClick={() => setSubmitStage(false)}
+                style={submitStage ? {} : { display: "none" }}
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Voltar
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                type="submit"
+                style={submitStage ? {} : { display: "none" }}
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Cadastrar
+              </Button>
+            </Grid>
+          </Grid>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
