@@ -53,52 +53,42 @@ export default function SignUp(props) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
+    setFNameError("")
+    setLNameError("")
+    setBirthError("")
+    setGenderError("")
+    setEmailError("")
+    setPassError("")
+
+
     if (!data.get("firstName") || !data.get("firstName").trim().length) {
       setFNameError("É preciso um Nome para continuar")
       return false
-    }
-    else {
-      setFNameError("")
     }
 
     if (!data.get("lastName") || !data.get("lastName").trim().length) {
       setLNameError("É preciso um Sobrenome para continuar")
       return false
     }
-    else {
-      setLNameError("")
-    }
 
     if (birthDateValue === null || isNaN(birthDateValue.$D) || isNaN(birthDateValue.$M) || isNaN(birthDateValue.$y)) {
       setBirthError("É preciso de uma Data válida para continuar")
       return false
-    }
-    else {
-      setBirthError("")
     }
 
     if (!data.get("gender") || !data.get("gender").trim().length) {
       setGenderError("É preciso um E-mail para continuar")
       return false
     }
-    else {
-      setGenderError("")
-    }
 
     if (!data.get("email") || !data.get("email").trim().length) {
       setEmailError("É preciso um E-mail para continuar")
       return false
     }
-    else {
-      setEmailError("")
-    }
 
     if (!data.get("password") || !data.get("password").length) {
       setPassError("É preciso uma Senha para continuar")
       return false
-    }
-    else {
-      setPassError("")
     }
 
     let date = birthDateValue.$d;

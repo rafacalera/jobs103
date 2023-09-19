@@ -7,6 +7,9 @@ import '../styles/global.css'
 
 const theme = createTheme({
     palette: {
+        background: {
+            default: "#E1E1FF"
+        },
         primary: {
             main: "#2C4ECA"
         },
