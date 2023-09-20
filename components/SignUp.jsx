@@ -17,6 +17,8 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
+// To Do - Extract this component and validate address when submit
+
 function Copyright(props) {
   return (
     <Typography
@@ -54,7 +56,24 @@ export default function SignUp(props) {
   const [passError, setPassError] = useState("");
   const [password, setPassword] = useState("");
 
-  const [cepError, setCepError] = useState("");
+  const [endereco, setEndereco] = useState({
+    cep: "",
+    logradouro: "",
+    numero: "",
+    bairro: "",
+    cidade: "",
+    estado: "",
+    complemento: ""
+  })
+
+  const [enderecoError, setEnderecoError] = useState({
+    cep: "",
+    logradouro: "",
+    numero: "",
+    bairro: "",
+    cidade: "",
+    estado: "",
+  })
 
   const nextStage = (event) => {
     setFNameError("");
@@ -109,23 +128,64 @@ export default function SignUp(props) {
     return true;
   };
 
+  const checkCEP = async (e) => {
+    const eventCep = e.target.value.replace(/\D/g, '')
+
+    setEnderecoError(prev => ({
+      ...prev,
+      cep: ""
+    }))
+
+    if (eventCep.trim() == "") {
+      return false
+    }
+
+    fetch(`https://viacep.com.br/ws/${eventCep}/json/`)
+      .then(res => res.json())
+      .then(data => {
+        setEndereco(prev => ({
+          ...prev,
+          logradouro: data.logradouro,
+          bairro: data.bairro,
+          cidade: data.localidade,
+          estado: data.uf,
+          complemento: data.complemento
+        }))
+      })
+      .catch(() => {
+        setEnderecoError(prev => ({
+          ...prev,
+          cep: "Cep Inválido"
+        }))
+        setEndereco(prev => ({
+          ...prev,
+          logradouro: "",
+          bairro: "",
+          cidade: "",
+          estado: "",
+          complemento: ""
+        }))
+      });
+
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget);
 
     let date = birthDateValue.$d;
     let ano = date.getFullYear();
     let mes = (date.getMonth() + 1).toString().padStart(2, "0");
     let dia = date.getDate().toString().padStart(2, "0");
 
-    data.append("birthDate", `${ano}-${mes}-${dia}`);
+    formData.append("birthDate", `${ano}-${mes}-${dia}`);
     console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      birthDate: data.get("birthDate"),
-      gender: data.get("gender"),
-      email: data.get("email"),
-      password: data.get("password"),
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      birthDate: formData.get("birthDate"),
+      gender: formData.get("gender"),
+      email: formData.get("email"),
+      password: formData.get("password"),
     });
   };
 
@@ -272,14 +332,127 @@ export default function SignUp(props) {
           >
             <Grid item xs={12} sm={4}>
               <TextField
-                error={cepError && cepError.length ? true : false}
+                error={enderecoError.cep && enderecoError.cep.length ? true : false}
                 required
                 fullWidth
                 id="cep"
                 label="CEP"
                 name="cep"
-                autoComplete="cep"
-                helperText={emailError}
+                value={endereco.cep}
+                onChange={(event) => {
+                  setEndereco(prev => ({
+                    ...prev,
+                    cep: event.target.value
+                  }));
+                }}
+                onBlur={checkCEP}
+                helperText={enderecoError.cep}
+              />
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                error={enderecoError.bairro && enderecoError.bairro.length ? true : false}
+                required
+                fullWidth
+                id="bairro"
+                label="Bairro"
+                name="bairro"
+                value={endereco.bairro}
+                onChange={(event) => {
+                  setEndereco(prev => ({
+                    ...prev,
+                    bairro: event.target.value
+                  }));
+                }}
+                helperText={enderecoError.bairro}
+              />
+            </Grid>
+            <Grid item xs={12} sm={8} >
+              <TextField
+                error={enderecoError.logradouro && enderecoError.logradouro.length ? true : false}
+                required
+                fullWidth
+                id="logradouro"
+                label="Rua"
+                name="logradouro"
+                value={endereco.logradouro}
+                onChange={(event) => {
+                  setEndereco(prev => ({
+                    ...prev,
+                    logradouro: event.target.value
+                  }));
+                }}
+                helperText={enderecoError.logradouro}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4} >
+              <TextField
+                ref={inputRef}
+                error={enderecoError.numero && enderecoError.numero.length ? true : false}
+                required
+                fullWidth
+                id="numero"
+                label="Número"
+                name="numero"
+                value={endereco.numero}
+                onChange={(event) => {
+                  setEndereco(prev => ({
+                    ...prev,
+                    numero: event.target.value
+                  }));
+                }}
+                helperText={enderecoError.numero}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                error={enderecoError.cidade && enderecoError.cidade.length ? true : false}
+                required
+                fullWidth
+                id="cidade"
+                label="Cidade"
+                name="cidade"
+                value={endereco.cidade}
+                onChange={(event) => {
+                  setEndereco(prev => ({
+                    ...prev,
+                    cidade: event.target.value
+                  }));
+                }}
+                helperText={enderecoError.cidade}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                error={enderecoError.estado && enderecoError.estado.length ? true : false}
+                required
+                fullWidth
+                id="estado"
+                label="Estado"
+                name="estado"
+                value={endereco.estado}
+                onChange={(event) => {
+                  setEndereco(prev => ({
+                    ...prev,
+                    estado: event.target.value
+                  }));
+                }}
+                helperText={enderecoError.estado}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                id="complemento"
+                label="Complemento"
+                name="complemento"
+                value={endereco.complemento}
+                onChange={(event) => {
+                  setEndereco(prev => ({
+                    ...prev,
+                    complemento: event.target.value
+                  }));
+                }}
               />
             </Grid>
           </Grid>
@@ -292,8 +465,8 @@ export default function SignUp(props) {
           >
             Próximo
           </Button>
-          <Grid container spacing={2}>
-          <Grid item>
+          <Grid container justifyContent="space-between">
+            <Grid item>
               <Button
                 onClick={() => setSubmitStage(false)}
                 style={submitStage ? {} : { display: "none" }}
