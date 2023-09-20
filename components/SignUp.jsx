@@ -387,7 +387,6 @@ export default function SignUp(props) {
             </Grid>
             <Grid item xs={12} sm={4} >
               <TextField
-                ref={inputRef}
                 error={enderecoError.numero && enderecoError.numero.length ? true : false}
                 required
                 fullWidth
