@@ -62,7 +62,7 @@ export default props => {
         if (personalData.firstName.trim().length < 3) {
             setPersonalError(prev => ({
                 ...prev,
-                fNameError: "É preciso um nome válido para continuar"
+                fNameError: "É preciso um Nome válido para continuar"
             }));
             return false;
         }

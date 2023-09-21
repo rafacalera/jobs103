@@ -104,7 +104,7 @@ export default props => {
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        error={personalError.email && personalError.email.length ? true : false}
+                        error={personalError.emailError && personalError.emailError.length ? true : false}
                         required
                         fullWidth
                         id="email"
@@ -118,7 +118,7 @@ export default props => {
                             }));
                         }}
                         autoComplete="email"
-                        helperText={personalError.email}
+                        helperText={personalError.emailError}
                     />
                 </Grid>
                 <Grid item xs={12}>
