@@ -71,6 +71,7 @@ export default props => {
                                 birthDateValue: newValue
                             }));
                         }}
+                        disableFuture
                         slotProps={{
                             textField: {
                                 helperText: personalError.birthError,
