@@ -7,11 +7,10 @@ import SignIn from "../components/SignIn";
 
 export default () => {
     const [isOpen, setIsOpen] = useState(false);
-
+    
     const menuController = {
         isOpen: isOpen, setIsOpen: setIsOpen
     }
-
 
     return (
         <>

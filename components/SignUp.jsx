@@ -1,7 +1,6 @@
 import Copyright from "./Copyright";
-import EnderecoControllers from "./EnderecoControllers";
-import PersonalDataControllers from "./PersonalDataControllers";
-import { useState } from "react";
+import EnderecoHandler from "./EnderecoHandler";
+import PessoalHandler from "./PessoalHandler";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,35 +11,40 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-// To Do - Extract this component and validate address when submit
+// To Do - Extract Components
 // Mask the CEP Textfield
 // Validate address before submit
 
 export default function SignUp(props) {
-  const [submitStage, setSubmitStage] = useState(false);
-
-  const submitController = {
-    submitStage: submitStage, setSubmitStage: setSubmitStage
-  }
+  const submitStage = props.submitController.submitStage;
+  const setSubmitStage = props.submitController.setSubmitStage;
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    let date = birthDateValue.$d;
+    let date = new Date(localStorage.nascimento);
     let ano = date.getFullYear();
     let mes = (date.getMonth() + 1).toString().padStart(2, "0");
     let dia = date.getDate().toString().padStart(2, "0");
 
-    formData.append("birthDate", `${ano}-${mes}-${dia}`);
+    formData.append("nascimento", `${ano}-${mes}-${dia}`);
     console.log({
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
-      birthDate: formData.get("birthDate"),
-      gender: formData.get("gender"),
+      primeiroNome: formData.get("primeiroNome"),
+      ultimoNome: formData.get("ultimoNome"),
+      nascimento: formData.get("nascimento"),
+      genero: formData.get("genero"),
       email: formData.get("email"),
-      password: formData.get("password"),
+      senha: formData.get("senha"),
+      cep: formData.get("cep"),
+      bairro: formData.get("bairro"),
+      logradouro: formData.get("logradouro"),
+      numero: formData.get("numero"),
+      cidade: formData.get("cidade"),
+      estado: formData.get("estado"),
+      complemento: formData.get("complemento"),
     });
+    localStorage.clear();
   };
 
   return (
@@ -65,8 +69,8 @@ export default function SignUp(props) {
           Cadastre-se
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <PersonalDataControllers submitController={submitController} />
-          <EnderecoControllers submitController={submitController} />
+          <PessoalHandler submitController={props.submitController} />
+          <EnderecoHandler submitController={props.submitController} />
 
           <Grid container justifyContent="space-between">
             <Grid item>
@@ -86,6 +90,7 @@ export default function SignUp(props) {
                 style={submitStage ? {} : { display: "none" }}
                 fullWidth
                 variant="contained"
+                disabled={submitStage ? false : true}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Cadastrar
