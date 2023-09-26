@@ -1,40 +1,9 @@
-import { useState } from "react";
-import Pessoal from "./Pessoal";
-import dayjs from "dayjs";
-
+import PessoalForm from "./PessoalForm";
 export default (props) => {
-  const now = new Date(Date.now());
-  const [pessoal, setPessoal] = useState({
-    primeiroNome: "",
-    ultimoNome: "",
-    nascimento: dayjs(
-      `${now.getFullYear() - 18}-${now.getMonth() + 1}-${now.getDate()}`,
-    ),
-    genero: "",
-    email: "",
-    senha: "",
-  });
-  const [pessoalError, setPessoalError] = useState({
-    primeiroNomeError: "",
-    ultimoNomeError: "",
-    nascimentoError: "",
-    generoError: "",
-    emailError: "",
-    senhaError: "",
-  });
+  const pessoal = props.pessoalController.pessoal;
+  const setPessoalError = props.pessoalController.setPessoalError;
 
-  const pessoalController = {
-    pessoalValues: {
-      pessoal: pessoal,
-      setPessoal: setPessoal,
-    },
-    pessoalErrors: {
-      pessoalError: pessoalError,
-      setPessoalError: setPessoalError,
-    },
-  };
-
-  const nextStage = (event) => {
+  const proximoEstagio = (event) => {
     setPessoalError((prev) => ({
       ...prev,
       primeiroNomeError: event.target.value,
@@ -136,11 +105,5 @@ export default (props) => {
     return true;
   };
 
-  return (
-    <Pessoal
-      submitController={props.submitController}
-      pessoalController={pessoalController}
-      nextStage={nextStage}
-    />
-  );
+  return <PessoalForm {...props} proximoEstagio={proximoEstagio} />;
 };

@@ -1,6 +1,6 @@
 import Copyright from "./Copyright";
-import EnderecoHandler from "./EnderecoHandler";
-import PessoalHandler from "./PessoalHandler";
+import EnderecoStates from "./EnderecoStates";
+import PessoalStates from "./PessoalStates";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,9 +11,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-// To Do - Extract Components
+// To Do -
 // Mask the CEP Textfield
-// Validate address before submit
+// Validate address before submit - props.children
 
 export default function SignUp(props) {
   const submitStage = props.submitController.submitStage;
@@ -69,8 +69,8 @@ export default function SignUp(props) {
           Cadastre-se
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <PessoalHandler submitController={props.submitController} />
-          <EnderecoHandler submitController={props.submitController} />
+          <PessoalStates submitController={props.submitController} />
+          <EnderecoStates submitController={props.submitController} />
 
           <Grid container justifyContent="space-between">
             <Grid item>
