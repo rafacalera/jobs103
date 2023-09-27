@@ -70,6 +70,14 @@ export default function SignUp(props) {
       return false;
     }
 
+    if (endereco.bairro.trim().length === 0) {
+      setEnderecoError(prev => ({
+        ...prev,
+        bairro: "É preciso inserir o bairro para continuar"
+      }));
+      return false;
+    }
+
     if (endereco.logradouro.trim().length === 0) {
       setEnderecoError(prev => ({
         ...prev,
@@ -85,11 +93,10 @@ export default function SignUp(props) {
       }));
       return false;
     }
-
-    if (endereco.bairro.trim().length === 0) {
+    if (endereco.cidade.trim().length === 0) {
       setEnderecoError(prev => ({
         ...prev,
-        bairro: "É preciso inserir o bairro para continuar"
+        cidade: "É preciso inserir o número da residência para continuar"
       }));
       return false;
     }
