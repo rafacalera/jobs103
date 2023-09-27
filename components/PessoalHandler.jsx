@@ -6,27 +6,27 @@ export default (props) => {
   const proximoEstagio = (event) => {
     setPessoalError((prev) => ({
       ...prev,
-      primeiroNomeError: event.target.value,
+      primeiroNomeError: "",
     }));
     setPessoalError((prev) => ({
       ...prev,
-      ultimoNomeError: event.target.value,
+      ultimoNomeError: "",
     }));
     setPessoalError((prev) => ({
       ...prev,
-      nascimentoError: event.target.value,
+      nascimentoError: "",
     }));
     setPessoalError((prev) => ({
       ...prev,
-      generoError: event.target.value,
+      generoError: "",
     }));
     setPessoalError((prev) => ({
       ...prev,
-      emailError: event.target.value,
+      emailError: "",
     }));
     setPessoalError((prev) => ({
       ...prev,
-      senhaError: event.target.value,
+      senhaError: "",
     }));
 
     if (pessoal.primeiroNome.trim().length < 3) {

@@ -1,21 +1,58 @@
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
 
-export default ({
-  submitController,
-  enderecoController,
-  enderecoErrorController,
-  checarCep,
-}) => {
-  const endereco = enderecoController.endereco;
-  const setEndereco = enderecoController.setEndereco;
-  const enderecoError = enderecoErrorController.enderecoError;
+export default (props) => {
+  const endereco = props.enderecoController.endereco;
+  const setEndereco = props.enderecoController.setEndereco;
+  const enderecoError = props.enderecoController.enderecoError;
+  const setEnderecoError = props.enderecoController.setEnderecoError;
+
+  const checarCep = async (e) => {
+    const eventCep = e.target.value.replace(/\D/g, '')
+
+    setEnderecoError(prev => ({
+      ...prev,
+      cep: ""
+    }))
+
+    if (eventCep.trim() == "") {
+      return false
+    }
+
+    fetch(`https://viacep.com.br/ws/${eventCep}/json/`)
+      .then(res => res.json())
+      .then(data => {
+        setEndereco(prev => ({
+          ...prev,
+          logradouro: data.logradouro,
+          bairro: data.bairro,
+          cidade: data.localidade,
+          estado: data.uf,
+          complemento: data.complemento
+        }))
+      })
+      .catch(() => {
+        setEnderecoError(prev => ({
+          ...prev,
+          cep: "Cep Inválido"
+        }))
+        setEndereco(prev => ({
+          ...prev,
+          logradouro: "",
+          bairro: "",
+          cidade: "",
+          estado: "",
+          complemento: ""
+        }))
+      });
+  }
 
   return (
     <Grid
       container
       spacing={2}
-      style={submitController.submitStage ? {} : { display: "none" }}
+      style={props.submitController.submitStage ? {} : { display: "none" }}
     >
       <Grid item xs={12} sm={4}>
         <TextField
