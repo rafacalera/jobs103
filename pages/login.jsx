@@ -2,12 +2,12 @@ import React, { useState } from "react";
 
 import Navbar from "../components/Navbar";
 import Head from "next/head";
-import SignIn from "../components/SignIn";
+import SignIn from "../components/login/SignIn";
 
 
 export default () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     const menuController = {
         isOpen: isOpen, setIsOpen: setIsOpen
     }
@@ -18,7 +18,7 @@ export default () => {
                 <title>Login</title>
             </Head>
 
-            <Navbar menuController={menuController} login={true} />
+            <Navbar menuController={menuController} login={false} />
             <SignIn menuController={menuController} />
         </>
     )

@@ -1,6 +1,5 @@
-import Copyright from './Copyright';
+import Copyright from '../Copyright';
 
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,16 +13,19 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
+import { useState } from 'react';
+import handleSubmit from './handleSubmit';
 
 export default function SignIn(props) {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    const [login, setLogin] = useState({
+        email: "",
+        senha: ""
+    })
+
+    const [loginError, setLoginError] = useState({
+        email: "",
+        senha: ""
+    })
 
     return (
         <Container style={props.menuController.isOpen ? { display: 'none' } : {}} component="main" maxWidth="xs">
@@ -42,8 +44,14 @@ export default function SignIn(props) {
                 <Typography component="h1" variant="h5">
                     Bem vindo(a) de volta!
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <Box component="form" onSubmit={(e) => handleSubmit(e, login, setLoginError)} noValidate sx={{ mt: 1 }}>
                     <TextField
+                        error={
+                            loginError.email &&
+                                loginError.email.length
+                                ? true
+                                : false
+                        }
                         margin="normal"
                         required
                         fullWidth
@@ -51,9 +59,23 @@ export default function SignIn(props) {
                         label="Endereço de E-mail"
                         name="email"
                         autoComplete="email"
+                        value={login.email}
+                        onChange={(event) => {
+                            setLogin((prev) => ({
+                                ...prev,
+                                email: event.target.value,
+                            }));
+                        }}
+                        helperText={loginError.email}
                         autoFocus
                     />
                     <TextField
+                        error={
+                            loginError.senha &&
+                                loginError.senha.length
+                                ? true
+                                : false
+                        }
                         margin="normal"
                         required
                         fullWidth
@@ -62,6 +84,14 @@ export default function SignIn(props) {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        value={login.senha}
+                        onChange={(event) => {
+                            setLogin((prev) => ({
+                                ...prev,
+                                senha: event.target.value,
+                            }));
+                        }}
+                        helperText={loginError.senha}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}

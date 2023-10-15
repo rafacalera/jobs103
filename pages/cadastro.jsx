@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Navbar from "../components/Navbar";
 import Head from "next/head";
-import SignUp from "../components/SignUp";
+import SignUp from "../components/cadastro/SignUp";
 
 export default () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +23,7 @@ export default () => {
         <title>Cadastro</title>
       </Head>
 
-      <Navbar menuController={menuController} login={true} />
+      <Navbar menuController={menuController} login={false} />
       <SignUp
         menuController={menuController}
         submitController={submitController}

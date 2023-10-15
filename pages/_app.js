@@ -1,9 +1,12 @@
-import Head from "next/head";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+
 import 'dayjs/locale/pt-br';
 import '../styles/global.css'
+
+import { Provider } from "react-redux";
+import store from "../redux/store";
 
 const theme = createTheme({
     palette: {
@@ -29,11 +32,13 @@ const theme = createTheme({
 export default function MyApp({ Component, pageProps }) {
     return (
         <>
-            <ThemeProvider theme={theme}>
-                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
-                    <Component {...pageProps} />
-                </LocalizationProvider>
-            </ThemeProvider >
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
+                        <Component {...pageProps} />
+                    </LocalizationProvider>
+                </ThemeProvider >
+            </Provider>
         </>
     )
 }

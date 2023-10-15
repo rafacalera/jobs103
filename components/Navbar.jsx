@@ -2,8 +2,10 @@ import React from "react"
 import Image from "next/image"
 import curriculumImg from "../assets/curriculum-icon.png"
 import styles from "../styles/Navbar.module.css"
+import { useSelector } from "react-redux"
 
 export default props => {
+    const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
 
     return (
         <>
@@ -37,7 +39,8 @@ export default props => {
                                 borderRadius: "31.5px",
                                 background: "#2C4ECA"
                             }
-                        } className={props.menuController.isOpen ? styles.btnCadastroMenu : ''} href="/cadastro">Cadastro</a></li>
+                        } className={props.menuController.isOpen ? styles.btnCadastroMenu : ''} href="/cadastro">Cadastro</a>
+                        </li>
                     </ul>
                 </div>
             </nav >

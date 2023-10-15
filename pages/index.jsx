@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Head from "next/head";
 
 import Navbar from "../components/Navbar";
-import Main from "../components/Main";
+import Main from "../components/principal/Main";
 import Footer from "../components/Footer";
 
 export default () => {
