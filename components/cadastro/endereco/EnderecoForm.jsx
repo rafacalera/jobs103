@@ -1,51 +1,12 @@
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import checarCep from "./checarCep";
 
 export default (props) => {
   const endereco = props.enderecoController.endereco;
   const setEndereco = props.enderecoController.setEndereco;
   const enderecoError = props.enderecoController.enderecoError;
   const setEnderecoError = props.enderecoController.setEnderecoError;
-
-  const checarCep = async (e) => {
-    const eventCep = e.target.value.replace(/\D/g, "");
-
-    setEnderecoError((prev) => ({
-      ...prev,
-      cep: "",
-    }));
-
-    if (eventCep.trim() == "") {
-      return false;
-    }
-
-    fetch(`https://viacep.com.br/ws/${eventCep}/json/`)
-      .then((res) => res.json())
-      .then((data) => {
-        setEndereco((prev) => ({
-          ...prev,
-          logradouro: data.logradouro,
-          bairro: data.bairro,
-          cidade: data.localidade,
-          estado: data.uf,
-          complemento: data.complemento,
-        }));
-      })
-      .catch(() => {
-        setEnderecoError((prev) => ({
-          ...prev,
-          cep: "Cep Inválido",
-        }));
-        setEndereco((prev) => ({
-          ...prev,
-          logradouro: "",
-          bairro: "",
-          cidade: "",
-          estado: "",
-          complemento: "",
-        }));
-      });
-  };
 
   return (
     <Grid
@@ -69,7 +30,7 @@ export default (props) => {
               cep: event.target.value,
             }));
           }}
-          onBlur={checarCep}
+          onBlur={(e) => checarCep(e, setEndereco, setEnderecoError)}
           helperText={enderecoError.cep}
         />
       </Grid>

@@ -1,33 +1,27 @@
 import styles from "../../styles/CurriculoBody.module.css";
 import PessoalCampos from "./campos/Pessoal";
 import EnderecoCampos from "./campos/Endereco";
-
+import { ChevronDown } from "../Icone";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 export default (props) => {
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
+  const [exibirCurriculo, setExibirCurriculo] = useState(true);
 
   return (
     <div className={styles.divConteudo}>
-      <div className={styles.divTitle}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className={styles.chevron}
-          onClick={(e) => console.log(currentUser)}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-          />
-        </svg>
+      <div
+        className={styles.divTitle}
+        onClick={(_) => setExibirCurriculo(!exibirCurriculo)}
+      >
+        {ChevronDown}
         <p>Currículo</p>
       </div>
-      <div className={styles.divCurriculo}>
+      <div
+        className={styles.divCurriculo}
+        style={!exibirCurriculo ? { display: "none" } : {}}
+      >
         <PessoalCampos currentUser={currentUser} />
         <EnderecoCampos currentUser={currentUser} />
       </div>
