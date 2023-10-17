@@ -17,8 +17,8 @@ import { useDispatch } from "react-redux";
 import handleSubmit from "./handleSubmit";
 
 export default function SignUp(props) {
-  const router = useRouter()
-  const dispatch = useDispatch()
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const [endereco, setEndereco] = useState({
     cep: "",
@@ -60,23 +60,31 @@ export default function SignUp(props) {
         <Typography component="h1" variant="h5">
           Cadastre-se
         </Typography>
-        <Box component="form" noValidate onSubmit={
-          (event) => handleSubmit(event, endereco, setEnderecoError, router, dispatch)
-        }
+        <Box
+          component="form"
+          noValidate
+          onSubmit={(event) =>
+            handleSubmit(event, endereco, setEnderecoError, router, dispatch)
+          }
           sx={{ mt: 3 }}
         >
           <PessoalStates submitController={props.submitController} />
-          <EnderecoForm submitController={props.submitController} enderecoController={{
-            endereco: endereco,
-            setEndereco: setEndereco,
-            enderecoError: enderecoError,
-            setEnderecoError: setEnderecoError
-          }} />
+          <EnderecoForm
+            submitController={props.submitController}
+            enderecoController={{
+              endereco: endereco,
+              setEndereco: setEndereco,
+              enderecoError: enderecoError,
+              setEnderecoError: setEnderecoError,
+            }}
+          />
           <Grid container justifyContent="space-between">
             <Grid item>
               <Button
                 onClick={() => props.submitController.setSubmitStage(false)}
-                style={props.submitController.submitStage ? {} : { display: "none" }}
+                style={
+                  props.submitController.submitStage ? {} : { display: "none" }
+                }
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
@@ -87,7 +95,9 @@ export default function SignUp(props) {
             <Grid item>
               <Button
                 type="submit"
-                style={props.submitController.submitStage ? {} : { display: "none" }}
+                style={
+                  props.submitController.submitStage ? {} : { display: "none" }
+                }
                 fullWidth
                 variant="contained"
                 disabled={props.submitController.submitStage ? false : true}

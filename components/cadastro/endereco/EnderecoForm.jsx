@@ -8,44 +8,44 @@ export default (props) => {
   const setEnderecoError = props.enderecoController.setEnderecoError;
 
   const checarCep = async (e) => {
-    const eventCep = e.target.value.replace(/\D/g, '')
+    const eventCep = e.target.value.replace(/\D/g, "");
 
-    setEnderecoError(prev => ({
+    setEnderecoError((prev) => ({
       ...prev,
-      cep: ""
-    }))
+      cep: "",
+    }));
 
     if (eventCep.trim() == "") {
-      return false
+      return false;
     }
 
     fetch(`https://viacep.com.br/ws/${eventCep}/json/`)
-      .then(res => res.json())
-      .then(data => {
-        setEndereco(prev => ({
+      .then((res) => res.json())
+      .then((data) => {
+        setEndereco((prev) => ({
           ...prev,
           logradouro: data.logradouro,
           bairro: data.bairro,
           cidade: data.localidade,
           estado: data.uf,
-          complemento: data.complemento
-        }))
+          complemento: data.complemento,
+        }));
       })
       .catch(() => {
-        setEnderecoError(prev => ({
+        setEnderecoError((prev) => ({
           ...prev,
-          cep: "Cep Inválido"
-        }))
-        setEndereco(prev => ({
+          cep: "Cep Inválido",
+        }));
+        setEndereco((prev) => ({
           ...prev,
           logradouro: "",
           bairro: "",
           cidade: "",
           estado: "",
-          complemento: ""
-        }))
+          complemento: "",
+        }));
       });
-  }
+  };
 
   return (
     <Grid

@@ -4,22 +4,22 @@ import Navbar from "../components/Navbar";
 import Head from "next/head";
 import SignIn from "../components/login/SignIn";
 
-
 export default () => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    const menuController = {
-        isOpen: isOpen, setIsOpen: setIsOpen
-    }
+  const menuController = {
+    isOpen: isOpen,
+    setIsOpen: setIsOpen,
+  };
 
-    return (
-        <>
-            <Head>
-                <title>Login</title>
-            </Head>
+  return (
+    <>
+      <Head>
+        <title>Login</title>
+      </Head>
 
-            <Navbar menuController={menuController} login={false} />
-            <SignIn menuController={menuController} />
-        </>
-    )
-}
+      <Navbar menuController={menuController} login={false} />
+      <SignIn menuController={menuController} />
+    </>
+  );
+};

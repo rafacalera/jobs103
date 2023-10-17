@@ -1,29 +1,29 @@
 .herro {
-    display: flex;
-    justify-content: center;
-    gap: 42px;
-    padding: 0;
-    margin: 70px;
+  display: flex;
+  justify-content: center;
+  gap: 42px;
+  padding: 0;
+  margin: 70px;
 }
 
-@media (max-width:1100px) {
-    .herro {
-        flex-wrap: wrap;
-        margin: 20px;
-    }
+@media (max-width: 1100px) {
+  .herro {
+    flex-wrap: wrap;
+    margin: 20px;
+  }
 }
 
-@media (max-width:600px) {
-    .herro h1 {
-        font-size: 58px;
-    }
+@media (max-width: 600px) {
+  .herro h1 {
+    font-size: 58px;
+  }
 
-    .herro p {
-        font-size: 16px;
-    }
+  .herro p {
+    font-size: 16px;
+  }
 
-    .imgSylvinho {
-        width: 380px;
-        height: 350px;
-    }
+  .imgSylvinho {
+    width: 380px;
+    height: 350px;
+  }
 }

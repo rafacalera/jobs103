@@ -6,8 +6,13 @@ import Button from "@mui/material/Button";
 
 import handleEstagio from "./handleEstagio";
 
-export default ({ submitController, setPessoal, pessoal, setPessoalError, pessoalError }) => {
-
+export default ({
+  submitController,
+  setPessoal,
+  pessoal,
+  setPessoalError,
+  pessoalError,
+}) => {
   return (
     <>
       <Grid
@@ -19,7 +24,7 @@ export default ({ submitController, setPessoal, pessoal, setPessoalError, pessoa
           <TextField
             error={
               pessoalError.primeiroNomeError &&
-                pessoalError.primeiroNomeError.length
+              pessoalError.primeiroNomeError.length
                 ? true
                 : false
             }
@@ -44,7 +49,7 @@ export default ({ submitController, setPessoal, pessoal, setPessoalError, pessoa
           <TextField
             error={
               pessoalError.ultimoNomeError &&
-                pessoalError.ultimoNomeError.length
+              pessoalError.ultimoNomeError.length
                 ? true
                 : false
             }
@@ -168,7 +173,14 @@ export default ({ submitController, setPessoal, pessoal, setPessoalError, pessoa
                         </Grid> */}
       </Grid>
       <Button
-        onClick={(e) => handleEstagio(e, setPessoalError, pessoal, submitController.setSubmitStage)}
+        onClick={(e) =>
+          handleEstagio(
+            e,
+            setPessoalError,
+            pessoal,
+            submitController.setSubmitStage,
+          )
+        }
         style={submitController.submitStage ? { display: "none" } : {}}
         fullWidth
         variant="contained"
