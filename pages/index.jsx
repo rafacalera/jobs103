@@ -18,15 +18,9 @@ export default () => {
       <Head>
         <title>Jobs-103</title>
       </Head>
-      <header>
-        <Navbar menuController={menuController} />
-      </header>
-      <main>
-        <Main menuController={menuController} />
-      </main>
-      <footer>
-        <Footer menuController={menuController} />
-      </footer>
+      <Navbar menuController={menuController} />
+      <Main menuController={menuController} />
+      <Footer menuController={menuController} />
     </>
   );
 };

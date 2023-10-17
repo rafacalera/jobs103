@@ -22,8 +22,7 @@ export default () => {
       <Head>
         <title>Cadastro</title>
       </Head>
-
-      <Navbar menuController={menuController} login={false} />
+      <Navbar menuController={menuController} login={true} />
       <SignUp
         menuController={menuController}
         submitController={submitController}

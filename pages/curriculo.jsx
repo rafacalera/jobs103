@@ -18,10 +18,11 @@ export default () => {
       <Head>
         <title>Currículo</title>
       </Head>
-      <Navbar menuController={menuController} login={true} />
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <Navbar menuController={menuController} login={false} />
+      <main style={{ display: "flex", justifyContent: "center" }}>
         <CurriculoBody />
-      </div>
+      </main>
+      <Footer menuController={menuController} />
     </>
   );
 };

@@ -11,7 +11,7 @@ import styles from "../styles/Footer.module.css";
 
 export default (props) => {
   return (
-    <>
+    <footer>
       <div
         className={
           props.menuController.isOpen ? styles.footerNone : styles.footer
@@ -90,6 +90,6 @@ export default (props) => {
           </ul>
         </div>
       </div>
-    </>
+    </footer>
   );
 };

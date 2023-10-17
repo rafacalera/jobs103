@@ -7,6 +7,8 @@ import Layout from "../Layout";
 
 export default ({ currentUser }) => {
   return (
+    // The value is not changing
+
     <Layout titulo="Informações Pessoais">
       <TextField
         id="nome"

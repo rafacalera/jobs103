@@ -13,6 +13,7 @@ export default (props) => {
     <div className={styles.divConteudo}>
       <div
         className={styles.divTitle}
+        style={exibirCurriculo ? {} : { borderRadius: "25px" }}
         onClick={(_) => setExibirCurriculo(!exibirCurriculo)}
       >
         {ChevronDown}
@@ -20,7 +21,7 @@ export default (props) => {
       </div>
       <div
         className={styles.divCurriculo}
-        style={!exibirCurriculo ? { display: "none" } : {}}
+        style={!exibirCurriculo ? { display: "none", height: "0px" } : {}}
       >
         <PessoalCampos currentUser={currentUser} />
         <EnderecoCampos currentUser={currentUser} />

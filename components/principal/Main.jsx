@@ -5,7 +5,7 @@ import styles from "../../styles/Main.module.css";
 
 export default (props) => {
   return (
-    <>
+    <main>
       <div
         className={props.menuController.isOpen ? {} : styles.herro}
         style={props.menuController.isOpen ? { display: "none" } : {}}
@@ -34,6 +34,6 @@ export default (props) => {
           />
         </div>
       </div>
-    </>
+    </main>
   );
 };

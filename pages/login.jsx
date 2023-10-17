@@ -18,7 +18,7 @@ export default () => {
         <title>Login</title>
       </Head>
 
-      <Navbar menuController={menuController} login={false} />
+      <Navbar menuController={menuController} login={true} />
       <SignIn menuController={menuController} />
     </>
   );

@@ -3,6 +3,8 @@ import Typography from "@mui/material/Typography";
 import Layout from "../Layout";
 
 export default ({ currentUser }) => {
+  // The value is not changing
+
   return (
     <Layout titulo="Endereço">
       <TextField

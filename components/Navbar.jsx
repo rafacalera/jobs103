@@ -8,7 +8,7 @@ export default (props) => {
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
 
   return (
-    <>
+    <header>
       <nav
         className={
           props.menuController.isOpen
@@ -52,11 +52,11 @@ export default (props) => {
               </a>
             </li>
             <li>
-              <a href="#">Currículo</a>
+              <a href="/curriculo">Currículo</a>
             </li>
           </ul>
           <ul
-            style={props.login ? { display: "none" } : {}}
+            style={props.login || currentUser ? { display: "none" } : {}}
             className={styles.navRightButtons}
           >
             <li>
@@ -90,6 +90,6 @@ export default (props) => {
           </ul>
         </div>
       </nav>
-    </>
+    </header>
   );
 };

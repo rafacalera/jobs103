@@ -21,6 +21,7 @@
   border-top-right-radius: 25px;
   cursor: pointer;
   width: (100% - 50px);
+  transition: 0.5s;
 }
 
 .divCurriculo {
