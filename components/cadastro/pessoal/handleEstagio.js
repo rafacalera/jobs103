@@ -32,6 +32,14 @@ function handleEstagio(event, setPessoalError, pessoal, setSubmitStage) {
     return false;
   }
 
+  if (pessoal.primeiroNome.length > 100) {
+    setPessoalError((prev) => ({
+      ...prev,
+      primeiroNomeError: "Nome passa o limite máximo de caracteres",
+    }));
+    return false;
+  }
+
   if (pessoal.ultimoNome.trim().length < 3) {
     setPessoalError((prev) => ({
       ...prev,
@@ -40,6 +48,13 @@ function handleEstagio(event, setPessoalError, pessoal, setSubmitStage) {
     return false;
   }
 
+  if (pessoal.ultimoNome.length > 100) {
+    setPessoalError((prev) => ({
+      ...prev,
+      ultimoNomeError: "Sobrenome passa o limite máximo de caracteres",
+    }));
+    return false;
+  }
   if (
     pessoal.nascimento === null ||
     isNaN(pessoal.nascimento.$D) ||
@@ -78,6 +93,14 @@ function handleEstagio(event, setPessoalError, pessoal, setSubmitStage) {
     return false;
   }
 
+  if (pessoal.email.length > 200) {
+    setPessoalError((prev) => ({
+      ...prev,
+      emailError: "E-mail passa o limite máximo de caracteres",
+    }));
+    return false;
+  }
+
   if (pessoal.senha.length < 6) {
     switch (pessoal.senha.length) {
       case 0:
@@ -92,6 +115,14 @@ function handleEstagio(event, setPessoalError, pessoal, setSubmitStage) {
           senhaError: "É preciso uma Senha mais forte",
         }));
     }
+    return false;
+  }
+
+  if (pessoal.senha.length > 255) {
+    setPessoalError((prev) => ({
+      ...prev,
+      senhaError: "Senha ultrapassa limite máximo de caracteres",
+    }));
     return false;
   }
 

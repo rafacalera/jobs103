@@ -23,6 +23,10 @@ export default function handleEndereco(endereco, setEnderecoError) {
     ...prev,
     estado: "",
   }));
+  setEnderecoError((prev) => ({
+    ...prev,
+    complemento: "",
+  }));
 
   if (endereco.cep.replace(/\D/g, "").trim().length === 0 || endereco.cep < 1) {
     setEnderecoError((prev) => ({
@@ -32,7 +36,7 @@ export default function handleEndereco(endereco, setEnderecoError) {
     return false;
   }
 
-  if (endereco.bairro.trim().length === 0) {
+  if (endereco.bairro.trim().length < 3) {
     setEnderecoError((prev) => ({
       ...prev,
       bairro: "É preciso inserir o bairro para continuar",
@@ -40,10 +44,29 @@ export default function handleEndereco(endereco, setEnderecoError) {
     return false;
   }
 
-  if (endereco.logradouro.trim().length === 0) {
+  if (endereco.bairro.length > 255) {
+    setEnderecoError((prev) => ({
+      ...prev,
+      bairro: "Nome do bairro passa do limite de caracteres válido",
+    }));
+    return false;
+  }
+
+  if (
+    endereco.logradouro.trim().length === 0 ||
+    endereco.logradouro.length > 255
+  ) {
     setEnderecoError((prev) => ({
       ...prev,
       logradouro: "É preciso inserir a Rua para continuar",
+    }));
+    return false;
+  }
+
+  if (endereco.logradouro.length > 255) {
+    setEnderecoError((prev) => ({
+      ...prev,
+      logradouro: "Nome da Rua passa do limite de caracteres válido",
     }));
     return false;
   }
@@ -65,11 +88,26 @@ export default function handleEndereco(endereco, setEnderecoError) {
     }));
     return false;
   }
+  if (endereco.cidade.length > 100) {
+    setEnderecoError((prev) => ({
+      ...prev,
+      cidade: "Nome da cidade ultrapassa o limite de caracteres válido",
+    }));
+    return false;
+  }
 
   if (endereco.estado.trim().length === 0) {
     setEnderecoError((prev) => ({
       ...prev,
       estado: "É preciso inserir o estado referente para continuar",
+    }));
+    return false;
+  }
+
+  if (endereco.complemento > 200) {
+    setEnderecoError((prev) => ({
+      ...prev,
+      estado: "Complemento do endereço passa o limite de caracteres válido",
     }));
     return false;
   }

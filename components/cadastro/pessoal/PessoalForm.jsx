@@ -112,9 +112,9 @@ export default ({
             fullWidth
             helperText={pessoalError.generoError}
           >
-            <MenuItem value="M">Masculino</MenuItem>
-            <MenuItem value="F">Feminino</MenuItem>
-            <MenuItem value="O">Outros</MenuItem>
+            <MenuItem value="Masculino">Masculino</MenuItem>
+            <MenuItem value="Feminino">Feminino</MenuItem>
+            <MenuItem value="Outro">Outro</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12}>

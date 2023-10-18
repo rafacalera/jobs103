@@ -37,6 +37,7 @@ export default function SignUp(props) {
     bairro: "",
     cidade: "",
     estado: "",
+    complemento: "",
   });
 
   return (
