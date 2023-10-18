@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import curriculumImg from "../assets/curriculum-icon.png";
 import styles from "../styles/Navbar.module.css";
@@ -16,7 +17,7 @@ export default (props) => {
             : styles.navbar
         }
       >
-        <a className={styles.logo} href="/">
+        <Link className={styles.logo} href="/">
           <Image
             src={curriculumImg}
             alt="curriculum-icon"
@@ -24,7 +25,7 @@ export default (props) => {
             height={32}
           />
           <span className={styles.jobs103}>Jobs-103</span>
-        </a>
+        </Link>
         <button
           className={styles.btnMobile}
           onClick={() => {
@@ -37,10 +38,10 @@ export default (props) => {
         <div>
           <ul className={styles.navCenterLinks}>
             <li>
-              <a href="#">Home</a>
+              <Link href="#">Home</Link>
             </li>
             <li>
-              <a
+              <Link
                 style={
                   props.menuController.isOpen
                     ? {}
@@ -49,10 +50,10 @@ export default (props) => {
                 href="#"
               >
                 Vagas
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/curriculo">Currículo</a>
+              <Link href="/curriculo">Currículo</Link>
             </li>
           </ul>
           <ul
@@ -60,12 +61,12 @@ export default (props) => {
             className={styles.navRightButtons}
           >
             <li>
-              <a className={styles.aLogin} href="/login">
+              <Link className={styles.aLogin} href="/login">
                 Login
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 style={
                   props.menuController.isOpen
                     ? {}
@@ -85,7 +86,7 @@ export default (props) => {
                 href="/cadastro"
               >
                 Cadastro
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
