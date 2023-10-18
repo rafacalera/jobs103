@@ -9,4 +9,13 @@
   gap: 20px;
   flex-wrap: wrap;
   margin-top: 16px;
+  opacity: 1;
+}
+
+.noneDisplay {
+  opacity: 0;
+  height: 0px;
+  transform: scaleY(0);
+  transition: 0.5s;
+  transition-delay: 0.5;
 }

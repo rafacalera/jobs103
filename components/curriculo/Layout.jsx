@@ -16,8 +16,11 @@ export default (props) => {
         {props.titulo}
       </Typography>
       <div
-        className={styles.conteudoChildren}
-        style={exibirConteudo ? {} : { display: "none" }}
+        className={
+          exibirConteudo
+            ? styles.conteudoChildren
+            : `${styles.conteudoChildren} ${styles.noneDisplay}`
+        }
       >
         {props.children}
       </div>
