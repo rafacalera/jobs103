@@ -3,8 +3,6 @@ import Typography from "@mui/material/Typography";
 import Layout from "../Layout";
 
 export default ({ currentUser }) => {
-  // The value is not changing
-
   return (
     <Layout titulo="Endereço">
       <TextField
@@ -12,38 +10,38 @@ export default ({ currentUser }) => {
         label="Cep"
         variant="standard"
         type="number"
-        value={currentUser ? currentUser.address.cep : null}
+        value={currentUser ? currentUser.address.cep : undefined}
       />
       <TextField
         id="bairro"
         label="Bairro"
         variant="standard"
-        value={currentUser ? currentUser.address.bairro : ""}
+        value={currentUser ? currentUser.address.bairro : undefined}
       />
       <TextField
         id="logradouro"
         label="Rua"
         variant="standard"
-        value={currentUser ? currentUser.address.logradouro : ""}
+        value={currentUser ? currentUser.address.logradouro : undefined}
       />
       <TextField
         id="numero"
         label="Número"
         variant="standard"
         type="number"
-        value={currentUser ? currentUser.address.numero : null}
+        value={currentUser ? currentUser.address.numero : undefined}
       />
       <TextField
         id="cidade"
         label="Cidade"
         variant="standard"
-        value={currentUser ? currentUser.address.cidade : ""}
+        value={currentUser ? currentUser.address.cidade : undefined}
       />
       <TextField
         id="estado"
         label="Estado"
         variant="standard"
-        value={currentUser ? currentUser.address.estado : ""}
+        value={currentUser ? currentUser.address.estado : undefined}
       />
       <TextField
         id="complemento"
@@ -51,7 +49,7 @@ export default ({ currentUser }) => {
         variant="standard"
         sx={{ minWidth: 300 }}
         helperText="Não obrigatório"
-        value={currentUser ? currentUser.address.complemento : ""}
+        value={currentUser ? currentUser.address.complemento : undefined}
       />
     </Layout>
   );

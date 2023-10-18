@@ -57,7 +57,7 @@ const User = database.define("Aluno", {
   complemento: Sequelize.STRING(200),
   nascidoEm: Sequelize.STRING(100),
   estadoCivil: Sequelize.STRING(50),
-  telefone: Sequelize.INTEGER,
+  telefone: Sequelize.STRING(20),
 });
 
 module.exports = User;

@@ -33,12 +33,15 @@
   align-items: center;
 }
 
-@media (max-width: 1055px) {
+@media (max-width: 670px) {
   .divConteudo {
     padding: 0;
     margin: 0;
     width: 100%;
   }
+}
+
+@media (max-width: 1055px) {
   .divCurriculo {
     margin-left: 15px;
   }

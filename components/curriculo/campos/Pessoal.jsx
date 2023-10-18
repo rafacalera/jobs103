@@ -7,20 +7,18 @@ import Layout from "../Layout";
 
 export default ({ currentUser }) => {
   return (
-    // The value is not changing
-
     <Layout titulo="Informações Pessoais">
       <TextField
         id="nome"
         label="Nome"
         variant="standard"
-        value={currentUser ? currentUser.personalInfos.primeiroNome : ""}
+        value={currentUser ? currentUser.personalInfos.primeiroNome : undefined}
       />
       <TextField
         id="sobrenome"
         label="Sobrenome"
         variant="standard"
-        value={currentUser ? currentUser.personalInfos.ultimoNome : ""}
+        value={currentUser ? currentUser.personalInfos.ultimoNome : undefined}
       />
       <FormControl variant="standard" sx={{ minWidth: 200 }}>
         <InputLabel id="inputEstadoCivl">Estado Civil</InputLabel>
@@ -34,7 +32,7 @@ export default ({ currentUser }) => {
         id="email"
         label="E-mail"
         variant="standard"
-        value={currentUser ? currentUser.personalInfos.email : ""}
+        value={currentUser ? currentUser.personalInfos.email : undefined}
         InputProps={{
           readOnly: true,
         }}
