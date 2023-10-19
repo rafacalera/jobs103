@@ -12,8 +12,16 @@ import axios from "axios";
 export default () => {
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [campos, setCampos] = useState({});
   const router = useRouter();
-  const dispatch = useDispatch();
+
+  function setarCampos(id, valor) {
+    setCampos((prev) => ({
+      ...prev,
+      [id]: valor,
+    }));
+  }
 
   const menuController = {
     isOpen: isOpen,
@@ -28,12 +36,29 @@ export default () => {
     axios
       .get(`/api/user/${currentUser.id}`)
       .then((response) => {
-        dispatch(loginUser(response.data));
+        setCampos({
+          primeiroNome: response.data ? response.data.nome.split(" ")[0] : "",
+          sobrenome: response.data
+            ? response.data.nome.split(" ").slice(1).join(" ")
+            : "",
+          estadoCivil: response.data ? response.data.estadoCivil : "",
+          email: response.data ? response.data.email : "",
+          telefone: response.data ? response.data.telefone : "",
+          nascidoEm: response.data ? response.data.nascidoEm : "",
+          cep: response.data ? response.data.cep : "",
+          bairro: response.data ? response.data.bairro : "",
+          logradouro: response.data ? response.data.logradouro : "",
+          numero: response.data ? response.data.numero : "",
+          cidade: response.data ? response.data.cidade : "",
+          uf: response.data ? response.data.uf : "",
+          complemento: response.data ? response.data.complemento : "",
+        });
+        setLoading(false);
       })
       .catch((err) => {
         console.error("\nErro: " + err);
       });
-  }, [currentUser, router]);
+  }, []);
 
   return (
     <>
@@ -41,10 +66,14 @@ export default () => {
         <title>Currículo</title>
       </Head>
       <Navbar menuController={menuController} login={false} />
-      <main style={{ display: "flex", justifyContent: "center" }}>
-        <CurriculoBody />
-      </main>
-      <Footer menuController={menuController} />
+      {!loading ? (
+        <>
+          <main style={{ display: "flex", justifyContent: "center" }}>
+            <CurriculoBody setarCampos={setarCampos} campos={campos} />
+          </main>
+          <Footer menuController={menuController} />
+        </>
+      ) : null}
     </>
   );
 };

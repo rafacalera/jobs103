@@ -1,4 +1,8 @@
-function handleSubmit(event, login, setLoginError) {
+import axios from "axios";
+
+import { loginUser } from "../../redux/user/actions";
+
+function handleSubmit(event, login, setLoginError, router, dispatch) {
   event.preventDefault();
 
   setLoginError((prev) => ({
@@ -23,10 +27,19 @@ function handleSubmit(event, login, setLoginError) {
   }
 
   const data = new FormData(event.currentTarget);
-  console.log({
-    email: data.get("email"),
-    password: data.get("password"),
-  });
+  axios
+    .post("/api/user/login", {
+      email: data.get("email"),
+      senha: data.get("password"),
+    })
+    .then((response) => {
+      dispatch(loginUser(response.data));
+      router.push("/curriculo");
+    })
+    .catch((error) => {
+      alert("Aluno não encontrado");
+      console.error(error);
+    });
 }
 
 export default handleSubmit;

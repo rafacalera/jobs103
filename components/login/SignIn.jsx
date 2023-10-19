@@ -12,11 +12,15 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import handleSubmit from "./handleSubmit";
 
 export default function SignIn(props) {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const [login, setLogin] = useState({
     email: "",
     senha: "",
@@ -50,7 +54,9 @@ export default function SignIn(props) {
         </Typography>
         <Box
           component="form"
-          onSubmit={(e) => handleSubmit(e, login, setLoginError)}
+          onSubmit={(e) =>
+            handleSubmit(e, login, setLoginError, router, dispatch)
+          }
           noValidate
           sx={{ mt: 1 }}
         >

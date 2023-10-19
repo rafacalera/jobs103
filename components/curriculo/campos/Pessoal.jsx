@@ -7,26 +7,7 @@ import Layout from "../Layout";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
-export default () => {
-  const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
-  const [campos, setCampos] = useState({
-    primeiroNome: currentUser ? currentUser.nome.split(" ")[0] : "",
-    sobrenome: currentUser
-      ? currentUser.nome.split(" ").slice(1).join(" ")
-      : "",
-    estadoCivil: currentUser ? currentUser.estadoCivil : "",
-    email: currentUser ? currentUser.email : "",
-    telefone: currentUser ? currentUser.telefone : "",
-    nascidoEm: currentUser ? currentUser.nascidoEm : "",
-  });
-
-  function setarCampos(id, valor) {
-    setCampos((prev) => ({
-      ...prev,
-      [id]: valor,
-    }));
-  }
-
+export default ({ setarCampos, campos }) => {
   return (
     <Layout titulo="Informações Pessoais">
       <TextField
@@ -55,7 +36,7 @@ export default () => {
         id="email"
         label="E-mail"
         variant="standard"
-        value={campos.primeiroNome}
+        value={campos.email}
         onChange={(e) => setarCampos(e.target.id, e.target.value)}
         InputProps={{
           readOnly: true,
@@ -70,7 +51,7 @@ export default () => {
         id="nascidoEm"
         label="Cidadade natal"
         variant="standard"
-        value={campos.primeiroNome}
+        value={campos.nascidoEm}
         onChange={(e) => setarCampos(e.target.id, e.target.value)}
       />
     </Layout>

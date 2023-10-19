@@ -1,14 +1,13 @@
 import styles from "../../styles/CurriculoBody.module.css";
-import PessoalCampos from "./campos/Pessoal";
-import EnderecoCampos from "./campos/Endereco";
+import Pessoal from "./campos/Pessoal";
+import Endereco from "./campos/Endereco";
 import { ChevronDown } from "../Icone";
-import { useSelector } from "react-redux";
 import { useState } from "react";
 
-export default () => {
-  const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
+export default ({setarCampos, campos}) => {
   const [exibirCurriculo, setExibirCurriculo] = useState(true);
 
+  
   return (
     <div className={styles.divConteudo}>
       <div
@@ -23,8 +22,8 @@ export default () => {
         className={styles.divCurriculo}
         style={!exibirCurriculo ? { display: "none", height: "0px" } : {}}
       >
-        <PessoalCampos currentUser={currentUser} />
-        <EnderecoCampos currentUser={currentUser} />
+        <Pessoal  setarCampos={setarCampos} campos={campos}/>
+        <Endereco  setarCampos={setarCampos} campos={campos}/>
       </div>
     </div>
   );

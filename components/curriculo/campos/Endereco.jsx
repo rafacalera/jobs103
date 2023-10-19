@@ -1,28 +1,8 @@
 import { TextField } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import Layout from "../Layout";
-import { useState } from "react";
-import { useSelector } from "react-redux";
 
-export default () => {
-  const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
 
-  const [campos, setCampos] = useState({
-    cep: currentUser ? currentUser.cep : "",
-    bairro: currentUser ? currentUser.bairro : "",
-    logradouro: currentUser ? currentUser.logradouro : "",
-    numero: currentUser ? currentUser.numero : "",
-    cidade: currentUser ? currentUser.cidade : "",
-    uf: currentUser ? currentUser.uf : "",
-    complemento: currentUser ? currentUser.complemento : "",
-  });
-
-  function setarCampos(id, valor) {
-    setCampos((prev) => ({
-      ...prev,
-      [id]: valor,
-    }));
-  }
+export default ({setarCampos, campos}) => {
 
   return (
     <Layout titulo="Endereço">
