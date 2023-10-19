@@ -5,7 +5,7 @@ import { ChevronDown } from "../Icone";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
-export default (props) => {
+export default () => {
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
   const [exibirCurriculo, setExibirCurriculo] = useState(true);
 

@@ -1,30 +1,40 @@
 const database = require("../../../infra/db");
 const User = require("../../../models/user");
-export default async function post(req, res) {
-  if (req.method === "GET") {
+
+export default async function POST(req, res) {
+  if (req.method === "POST") {
     await database.sync();
+    const requisicao = req.body;
 
-    // CREATE
-    const novoUser = await User.create({
-      nome: "Rafael Calera",
-      email: "rafa_calera@hotmail.com",
-      senha: "123456",
-      dataNascimento: "2004-02-16",
-
-      genero: "Masculino",
-
-      cep: 15991290,
-      logradouro: "Rua Aldo Aldano Botura",
-      bairro: "Park Imperador",
-      numero: 1830,
-      uf: "SP",
-      cidade: "Matao",
-      complemento: "Pertinho",
-      nascidoEm: "Matão",
-      estadoCivil: "Solteiro",
+    const emailCadastrado = await User.findOne({
+      where: {
+        email: requisicao.email,
+      },
     });
 
-    console.log(novoUser);
-    res.send(201);
+    if (!emailCadastrado) {
+      const novoUser = await User.create({
+        nome: requisicao.nome,
+        email: requisicao.email,
+        senha: requisicao.senha,
+        dataNascimento: requisicao.dataNascimento,
+
+        genero: requisicao.genero,
+
+        cep: requisicao.cep,
+        logradouro: requisicao.logradouro,
+        bairro: requisicao.bairro,
+        numero: requisicao.numero,
+        uf: requisicao.uf,
+        cidade: requisicao.cidade,
+        complemento: requisicao.complemento,
+        telefone: requisicao.telefone,
+        nascidoEm: requisicao.nascidoEm,
+        estadoCivil: requisicao.estadoCivil,
+      });
+      res.status(201).json({ id: novoUser.id });
+      return;
+    }
+    res.status(400).send("Email in use");
   }
 }

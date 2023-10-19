@@ -3,7 +3,7 @@ const database = require("../infra/db");
 
 const User = database.define("Aluno", {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.BIGINT,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
@@ -15,6 +15,7 @@ const User = database.define("Aluno", {
   email: {
     type: Sequelize.STRING(200),
     allowNull: false,
+    unique: true,
   },
   senha: {
     type: Sequelize.STRING(255),
