@@ -8,8 +8,9 @@ const database = new Sequelize(
     dialect: "mysql",
     dialectOptions: {
       ssl: {
-        require: true,
-        rejectUnauthorized: false,
+        ssl: {
+          ca: process.env.CA_CERTIFICATE,
+        },
       },
     },
     host: process.env.DATA_BASE_URL,
