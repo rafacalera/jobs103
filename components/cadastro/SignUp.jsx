@@ -64,9 +64,9 @@ export default function SignUp(props) {
         <Box
           component="form"
           noValidate
-          onSubmit={(event) =>
-            handleSubmit(event, endereco, setEnderecoError, router, dispatch)
-          }
+          onSubmit={(event) => {
+            handleSubmit(event, endereco, setEnderecoError, router, dispatch);
+          }}
           sx={{ mt: 3 }}
         >
           <PessoalStates submitController={props.submitController} />
