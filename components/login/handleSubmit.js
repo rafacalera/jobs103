@@ -2,9 +2,16 @@ import axios from "axios";
 
 import { loginUser } from "../../redux/user/actions";
 
-function handleSubmit(event, login, setLoginError, router, dispatch) {
+function handleSubmit(
+  event,
+  login,
+  setLoginError,
+  router,
+  dispatch,
+  setIsDisabled,
+) {
   event.preventDefault();
-
+  setIsDisabled(true);
   setLoginError((prev) => ({
     ...prev,
     email: "",
@@ -16,14 +23,14 @@ function handleSubmit(event, login, setLoginError, router, dispatch) {
       ...prev,
       email: "Preencha seu E-mail para prosseguir",
     }));
-    return;
+    return setIsDisabled(false);
   }
   if (login.senha.trim().length === 0) {
     setLoginError((prev) => ({
       ...prev,
       senha: "Preencha sua Senha para prosseguir",
     }));
-    return;
+    return setIsDisabled(false);
   }
 
   const data = new FormData(event.currentTarget);
@@ -39,6 +46,7 @@ function handleSubmit(event, login, setLoginError, router, dispatch) {
     .catch((error) => {
       alert("Aluno não encontrado");
       console.error(error);
+      setIsDisabled(false);
     });
 }
 

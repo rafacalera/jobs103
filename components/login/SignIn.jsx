@@ -18,6 +18,7 @@ import { useState } from "react";
 import handleSubmit from "./handleSubmit";
 
 export default function SignIn(props) {
+  const [isDisabled, setIsDisabled] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -55,7 +56,14 @@ export default function SignIn(props) {
         <Box
           component="form"
           onSubmit={(e) =>
-            handleSubmit(e, login, setLoginError, router, dispatch)
+            handleSubmit(
+              e,
+              login,
+              setLoginError,
+              router,
+              dispatch,
+              setIsDisabled,
+            )
           }
           noValidate
           sx={{ mt: 1 }}
@@ -107,6 +115,7 @@ export default function SignIn(props) {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={isDisabled ? true : false}
           >
             Entrar
           </Button>

@@ -168,8 +168,12 @@ export default (props) => {
           fullWidth
           helperText={enderecoError.estado}
         >
-          {estados.map((estado) => {
-            return <MenuItem value={estado.sigla}>{estado.sigla}</MenuItem>;
+          {estados.map((estado, i) => {
+            return (
+              <MenuItem key={i} value={estado.sigla}>
+                {estado.sigla}
+              </MenuItem>
+            );
           })}
         </TextField>
       </Grid>
