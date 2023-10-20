@@ -2,9 +2,16 @@ import axios from "axios";
 import { loginUser } from "../../redux/user/actions";
 import handleEndereco from "../cadastro/endereco/handleEndereco";
 
-function handleSubmit(event, endereco, setEnderecoError, router, dispatch) {
+function handleSubmit(
+  event,
+  endereco,
+  setEnderecoError,
+  router,
+  dispatch,
+  setIsDisabled,
+) {
   event.preventDefault();
-
+  setIsDisabled(true);
   if (handleEndereco(endereco, setEnderecoError)) {
     const formData = new FormData(event.currentTarget);
 
@@ -38,9 +45,12 @@ function handleSubmit(event, endereco, setEnderecoError, router, dispatch) {
         router.push("/curriculo");
         localStorage.clear();
       })
-      .catch((error) => {
+      .catch((err) => {
+        setIsDisabled(false);
+        if (err.response.data.error === "email") {
+          return alert("E-mail já cadastrado");
+        }
         alert("Erro ao cadastrar usuário. Tente novamente mais tarde.");
-        console.error(error);
       });
   }
 }

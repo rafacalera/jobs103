@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import handleSubmit from "./handleSubmit";
 
 export default function SignUp(props) {
+  const [isDisabled, setIsDisabled] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -65,7 +66,14 @@ export default function SignUp(props) {
           component="form"
           noValidate
           onSubmit={(event) => {
-            handleSubmit(event, endereco, setEnderecoError, router, dispatch);
+            handleSubmit(
+              event,
+              endereco,
+              setEnderecoError,
+              router,
+              dispatch,
+              setIsDisabled,
+            );
           }}
           sx={{ mt: 3 }}
         >
@@ -101,7 +109,13 @@ export default function SignUp(props) {
                 }
                 fullWidth
                 variant="contained"
-                disabled={props.submitController.submitStage ? false : true}
+                disabled={
+                  !props.submitController.submitStage
+                    ? true
+                    : isDisabled
+                    ? true
+                    : false
+                }
                 sx={{ mt: 3, mb: 2 }}
               >
                 Cadastrar

@@ -1,10 +1,13 @@
 const database = require("../../../infra/db");
 const User = require("../../../models/user");
+const bcrypt = require("bcrypt");
 
 export default async function POST(req, res) {
   if (req.method === "POST") {
     await database.sync();
     const requisicao = req.body;
+    const saltRounds = 10;
+    const hashedSenha = await bcrypt.hash(requisicao.senha, saltRounds);
 
     const emailCadastrado = await User.findOne({
       where: {
@@ -16,7 +19,8 @@ export default async function POST(req, res) {
       const novoUser = await User.create({
         nome: requisicao.nome,
         email: requisicao.email,
-        senha: requisicao.senha,
+
+        senha: hashedSenha,
         dataNascimento: requisicao.dataNascimento,
 
         genero: requisicao.genero,
@@ -35,6 +39,6 @@ export default async function POST(req, res) {
       res.status(201).json({ id: novoUser.id });
       return;
     }
-    res.status(400).send("Email in use");
+    res.status(400).json({ error: "email" });
   }
 }

@@ -1,6 +1,6 @@
-require("dotenv/config");
 const database = require("../../../infra/db");
 const User = require("../../../models/user");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 export default async function POST(req, res) {
@@ -10,12 +10,18 @@ export default async function POST(req, res) {
     const usuario = await User.findOne({
       where: {
         email: req.body.email,
-        senha: req.body.senha,
       },
     });
 
     if (!usuario) {
-      res.status(400).send("User not found");
+      res.status(400).json({ error: "email" });
+      return;
+    }
+
+    const senhaCoincide = await bcrypt.compare(req.body.senha, usuario.senha);
+
+    if (!senhaCoincide) {
+      res.status(400).json({ error: "senha" });
       return;
     }
 

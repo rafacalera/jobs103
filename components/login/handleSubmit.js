@@ -43,9 +43,9 @@ function handleSubmit(
       dispatch(loginUser(response.data));
       router.push("/curriculo");
     })
-    .catch((error) => {
-      alert("Aluno não encontrado");
-      console.error(error);
+    .catch((err) => {
+      if (err.response.data.error === "email") alert("E-mail não confere");
+      else if (err.response.data.error === "senha") alert("Senha não confere");
       setIsDisabled(false);
     });
 }
