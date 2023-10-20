@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const mysql2 = require("mysql2");
 
 const database = new Sequelize(
   process.env.DATA_BASE,
@@ -6,6 +7,7 @@ const database = new Sequelize(
   process.env.PASSWORD_DB,
   {
     dialect: "mysql",
+    dialectModule: mysql2,
     dialectOptions: {
       ssl: {
         require: true,
