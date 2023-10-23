@@ -8,7 +8,10 @@ export default function verifyJWT(handler) {
       req.id = decoded.id;
       return handler(req, res);
     } catch (err) {
-      return res.status(401).end();
+      if (err instanceof jwt.TokenExpiredError) {
+        return res.status(401).send("Token expired");
+      }
+      return res.status(401).send("Unauthorized");
     }
   };
 }

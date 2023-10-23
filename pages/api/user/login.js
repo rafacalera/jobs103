@@ -26,7 +26,7 @@ export default async function postLogin(req, res) {
     }
 
     const token = jwt.sign({ id: usuario.id }, process.env.API_SECRET, {
-      expiresIn: 30 * 60,
+      expiresIn: 5 * 60,
     });
     res.status(200).json({ auth: true, token });
   }

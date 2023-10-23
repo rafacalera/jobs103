@@ -5,15 +5,17 @@ import Head from "next/head";
 import Footer from "../components/Footer";
 import CurriculoBody from "../components/curriculo/CurriculoBody";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../redux/user/actions";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../redux/user/actions";
+import { CircularProgress } from "@mui/material";
 
 export default () => {
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [campos, setCampos] = useState({});
+  const dispatch = useDispatch();
   const router = useRouter();
 
   function setarCampos(id, valor) {
@@ -60,7 +62,9 @@ export default () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.error("\nErro: " + err);
+        if (err.response.data === "Token expired") router.push("/login");
+        dispatch(logoutUser());
+        console.error(err);
       });
   }, []);
 
@@ -75,9 +79,20 @@ export default () => {
           <main style={{ display: "flex", justifyContent: "center" }}>
             <CurriculoBody setarCampos={setarCampos} campos={campos} />
           </main>
-          <Footer menuController={menuController} />
         </>
-      ) : null}
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <CircularProgress color="primary" />
+        </div>
+      )}
+      <Footer menuController={menuController} />
     </>
   );
 };
