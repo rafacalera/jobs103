@@ -106,10 +106,10 @@ export default function SignIn(props) {
             }}
             helperText={loginError.senha}
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Lembrar-me"
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth

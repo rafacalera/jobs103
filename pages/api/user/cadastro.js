@@ -1,6 +1,7 @@
 const database = require("../../../infra/db");
 const User = require("../../../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 export default async function POST(req, res) {
   if (req.method === "POST") {
@@ -36,7 +37,10 @@ export default async function POST(req, res) {
         nascidoEm: requisicao.nascidoEm,
         estadoCivil: requisicao.estadoCivil,
       });
-      res.status(201).json({ id: novoUser.id });
+      const token = jwt.sign({ id: novoUser.id }, process.env.API_SECRET, {
+        expiresIn: 30 * 60,
+      });
+      res.status(201).json({ auth: true, token });
       return;
     }
     res.status(400).json({ error: "email" });

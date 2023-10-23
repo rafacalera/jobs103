@@ -34,7 +34,11 @@ export default () => {
       return;
     }
     axios
-      .get(`/api/user/${currentUser.id}`)
+      .get("/api/user/info", {
+        headers: {
+          "x-access-token": currentUser.token,
+        },
+      })
       .then((response) => {
         setCampos({
           primeiroNome: response.data ? response.data.nome.split(" ")[0] : "",

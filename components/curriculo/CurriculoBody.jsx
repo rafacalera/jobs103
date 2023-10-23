@@ -4,10 +4,9 @@ import Endereco from "./campos/Endereco";
 import { ChevronDown } from "../Icone";
 import { useState } from "react";
 
-export default ({setarCampos, campos}) => {
+export default ({ setarCampos, campos }) => {
   const [exibirCurriculo, setExibirCurriculo] = useState(true);
 
-  
   return (
     <div className={styles.divConteudo}>
       <div
@@ -22,8 +21,8 @@ export default ({setarCampos, campos}) => {
         className={styles.divCurriculo}
         style={!exibirCurriculo ? { display: "none", height: "0px" } : {}}
       >
-        <Pessoal  setarCampos={setarCampos} campos={campos}/>
-        <Endereco  setarCampos={setarCampos} campos={campos}/>
+        <Pessoal setarCampos={setarCampos} campos={campos} />
+        <Endereco setarCampos={setarCampos} campos={campos} />
       </div>
     </div>
   );

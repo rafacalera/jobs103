@@ -1,9 +1,7 @@
 import { TextField } from "@mui/material";
 import Layout from "../Layout";
 
-
-export default ({setarCampos, campos}) => {
-
+export default ({ setarCampos, campos }) => {
   return (
     <Layout titulo="Endereço">
       <TextField

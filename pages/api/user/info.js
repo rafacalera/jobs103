@@ -1,11 +1,11 @@
 const database = require("../../../infra/db");
 const User = require("../../../models/user");
+import verifyJWT from "../middleware";
 
-export default async function post(req, res) {
-  const userId = req.query.id;
+export async function getInfos(req, res) {
+  const userId = req.id;
   if (req.method === "GET") {
     await database.sync();
-    // READ
     const usuario = await User.findByPk(userId, {
       attributes: { exclude: ["senha", "createdAt", "updatedAt"] },
     });
@@ -15,4 +15,13 @@ export default async function post(req, res) {
       : res.status(400).send("User not found");
     return;
   }
+  res.status(400).send("Method not allowed");
 }
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default verifyJWT(getInfos);

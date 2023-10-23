@@ -3,7 +3,7 @@ const User = require("../../../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-export default async function POST(req, res) {
+export default async function postLogin(req, res) {
   if (req.method === "POST") {
     await database.sync();
 
@@ -14,17 +14,21 @@ export default async function POST(req, res) {
     });
 
     if (!usuario) {
-      res.status(400).json({ error: "email" });
+      res.status(401).json({ error: "email" });
       return;
     }
 
     const senhaCoincide = await bcrypt.compare(req.body.senha, usuario.senha);
 
     if (!senhaCoincide) {
-      res.status(400).json({ error: "senha" });
+      res.status(401).json({ error: "senha" });
       return;
     }
 
-    res.status(200).json({ id: usuario.id });
+    const token = jwt.sign({ id: usuario.id }, process.env.API_SECRET, {
+      expiresIn: 30 * 60,
+    });
+    res.status(200).json({ auth: true, token });
   }
+  res.status(400).send("Method not allowed");
 }

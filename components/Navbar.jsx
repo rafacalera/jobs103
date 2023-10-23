@@ -41,18 +41,6 @@ export default (props) => {
               <Link href="#">Home</Link>
             </li>
             <li>
-              <Link
-                style={
-                  props.menuController.isOpen
-                    ? {}
-                    : { color: "#2C4ECA", fontWeight: "700" }
-                }
-                href="#"
-              >
-                Vagas
-              </Link>
-            </li>
-            <li>
               <Link href="/curriculo">Currículo</Link>
             </li>
           </ul>
