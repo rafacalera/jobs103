@@ -28,7 +28,7 @@ export default async function postLogin(req, res) {
     const token = jwt.sign({ id: usuario.id }, process.env.API_SECRET, {
       expiresIn: 60 * 60,
     });
-    res.status(200).json({ auth: true, token });
+    return res.status(200).json({ auth: true, token });
   }
   res.status(400).send("Method not allowed");
 }
