@@ -18,25 +18,25 @@ export default (props) => {
 
   return (
     <>
-      {!loading ? (
-        <>
-          <header>
-            <nav
-              className={
-                props.menuController.isOpen
-                  ? `${styles.navbar} ${styles.active}`
-                  : styles.navbar
-              }
-            >
-              <Link className={styles.logo} href="/">
-                <Image
-                  src={curriculumImg}
-                  alt="curriculum-icon"
-                  width={32}
-                  height={32}
-                />
-                <span className={styles.jobs103}>Jobs-103</span>
-              </Link>
+      <header>
+        <nav
+          className={
+            props.menuController.isOpen
+              ? `${styles.navbar} ${styles.active}`
+              : styles.navbar
+          }
+        >
+          <Link className={styles.logo} href="/">
+            <Image
+              src={curriculumImg}
+              alt="curriculum-icon"
+              width={32}
+              height={32}
+            />
+            <span className={styles.jobs103}>Jobs-103</span>
+          </Link>
+          {!loading ? (
+            <>
               <button
                 className={styles.btnMobile}
                 onClick={() => {
@@ -101,10 +101,10 @@ export default (props) => {
                   Sair
                 </Link>
               </div>
-            </nav>
-          </header>
-        </>
-      ) : null}
+            </>
+          ) : null}
+        </nav>
+      </header>
     </>
   );
 };

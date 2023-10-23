@@ -38,7 +38,7 @@ export default async function POST(req, res) {
         estadoCivil: requisicao.estadoCivil,
       });
       const token = jwt.sign({ id: novoUser.id }, process.env.API_SECRET, {
-        expiresIn: 30 * 60,
+        expiresIn: 60 * 60,
       });
       res.status(201).json({ auth: true, token });
       return;
