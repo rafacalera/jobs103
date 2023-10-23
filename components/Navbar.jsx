@@ -4,10 +4,12 @@ import Image from "next/image";
 import curriculumImg from "../assets/curriculum-icon.png";
 import styles from "../styles/Navbar.module.css";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../redux/user/actions";
 
 export default (props) => {
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
-
+  const dispatch = useDispatch();
   return (
     <header>
       <nav
@@ -77,6 +79,16 @@ export default (props) => {
               </Link>
             </li>
           </ul>
+          <Link
+            className={`${styles.aLogin} ${styles.logout}`}
+            onClick={() => {
+              displatch(logoutUser());
+            }}
+            style={currentUser ? {} : { display: "none" }}
+            href="/"
+          >
+            Sair
+          </Link>
         </div>
       </nav>
     </header>
