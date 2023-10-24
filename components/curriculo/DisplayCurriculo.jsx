@@ -3,7 +3,7 @@ import Campos from "./Campos";
 import { ChevronDown } from "../Icone";
 import { useState } from "react";
 
-export default ({ setarCampos, campos }) => {
+export default () => {
   const [exibirCurriculo, setExibirCurriculo] = useState(true);
 
   return (
@@ -20,7 +20,7 @@ export default ({ setarCampos, campos }) => {
         className={styles.divCurriculo}
         style={!exibirCurriculo ? { display: "none", height: "0px" } : {}}
       >
-        <Campos setarCampos={setarCampos} campos={campos} />
+        <Campos />
       </div>
     </div>
   );

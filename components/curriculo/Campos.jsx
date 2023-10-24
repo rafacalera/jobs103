@@ -5,8 +5,16 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Layout from "./Layout";
 import Fields from "../../helpers/fields";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateCurriculum } from "../../redux/curriculum/actions";
 
-export default ({ setarCampos, campos }) => {
+export default () => {
+  const dispatch = useDispatch();
+  const { currentCurriculum } = useSelector(
+    (rootReducer) => rootReducer.curriculumReducer,
+  );
+
   return (
     <>
       {Fields.map((section) => (
@@ -24,9 +32,13 @@ export default ({ setarCampos, campos }) => {
                     labelId={field.labelId}
                     id={field.id}
                     label={field.label}
-                    value={campos[field.id]}
-                    defaultValue={campos[field.id]}
-                    onChange={(e) => setarCampos(field.id, e.target.value)}
+                    value={currentCurriculum.basicInfos[field.id]}
+                    defaultValue={currentCurriculum.basicInfos[field.id]}
+                    onChange={(e) => {
+                      dispatch(
+                        updateCurriculum(field.redux, field.id, e.target.value),
+                      );
+                    }}
                   >
                     {field.values.map((option) => (
                       <MenuItem
@@ -52,8 +64,21 @@ export default ({ setarCampos, campos }) => {
                       ? { minWidth: 300 }
                       : { minWidth: 200 }
                   }
-                  value={campos[field.id]}
-                  onChange={(e) => setarCampos(e.target.id, e.target.value)}
+                  value={
+                    field.id === "primeiroNome"
+                      ? currentCurriculum.basicInfos.nome.split(" ")[0]
+                      : field.id === "sobrenome"
+                      ? currentCurriculum.basicInfos.nome
+                          .split(" ")
+                          .slice(1)
+                          .join(" ")
+                      : currentCurriculum.basicInfos[field.id]
+                  }
+                  onChange={(e) => {
+                    dispatch(
+                      updateCurriculum(field.redux, field.id, e.target.value),
+                    );
+                  }}
                 />
               );
             }
