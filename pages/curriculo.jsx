@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
 import Footer from "../components/Footer";
-import CurriculoBody from "../components/curriculo/CurriculoBody";
+import DisplayCurriculo from "../components/curriculo/DisplayCurriculo";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ export default () => {
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [campos, setCampos] = useState({});
+  const [campos, setCampos] = useState({ undefined });
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -77,7 +77,7 @@ export default () => {
       {!loading ? (
         <>
           <main style={{ display: "flex", justifyContent: "center" }}>
-            <CurriculoBody setarCampos={setarCampos} campos={campos} />
+            <DisplayCurriculo setarCampos={setarCampos} campos={campos} />
           </main>
         </>
       ) : (

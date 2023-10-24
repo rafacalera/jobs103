@@ -6,7 +6,7 @@ export default (props) => {
   const [exibirConteudo, setExibirConteudo] = useState(true);
 
   return (
-    <div className={styles.conteudo}>
+    <div className={styles.conteudo} key={props.titulo}>
       <Typography
         component="h1"
         variant="h5"

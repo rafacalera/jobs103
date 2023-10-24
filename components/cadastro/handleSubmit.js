@@ -53,6 +53,7 @@ function handleSubmit(
         alert("Erro ao cadastrar usuário. Tente novamente mais tarde.");
       });
   }
+  setIsDisabled(false);
 }
 
 export default handleSubmit;

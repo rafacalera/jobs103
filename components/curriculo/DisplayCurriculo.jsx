@@ -1,6 +1,5 @@
 import styles from "../../styles/CurriculoBody.module.css";
-import Pessoal from "./campos/Pessoal";
-import Endereco from "./campos/Endereco";
+import Campos from "./Campos";
 import { ChevronDown } from "../Icone";
 import { useState } from "react";
 
@@ -21,8 +20,7 @@ export default ({ setarCampos, campos }) => {
         className={styles.divCurriculo}
         style={!exibirCurriculo ? { display: "none", height: "0px" } : {}}
       >
-        <Pessoal setarCampos={setarCampos} campos={campos} />
-        <Endereco setarCampos={setarCampos} campos={campos} />
+        <Campos setarCampos={setarCampos} campos={campos} />
       </div>
     </div>
   );

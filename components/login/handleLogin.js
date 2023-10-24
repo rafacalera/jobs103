@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { loginUser } from "../../redux/user/actions";
 
-function handleSubmit(
+function handleLogin(
   event,
   login,
   setLoginError,
@@ -50,4 +50,4 @@ function handleSubmit(
     });
 }
 
-export default handleSubmit;
+export default handleLogin;
