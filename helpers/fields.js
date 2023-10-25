@@ -124,6 +124,42 @@ const Fields = [
       },
     ],
   },
+  {
+    section: "Formação Acadêmica",
+    type: "list",
+    fields: [
+      {
+        id: "instituicao",
+        label: "Instituição",
+        type: "text",
+        redux: "academicEducation",
+      },
+      {
+        id: "curso",
+        label: "Curso",
+        type: "text",
+        redux: "academicEducation",
+      },
+      {
+        id: "grauFormacao",
+        label: "Grau de Formação",
+        type: "text",
+        redux: "academicEducation",
+      },
+      {
+        id: "dataInicio",
+        label: "Data Inicio",
+        type: "text",
+        redux: "academicEducation",
+      },
+      {
+        id: "dataFim",
+        label: "Data Fim",
+        type: "text",
+        redux: "academicEducation",
+      },
+    ],
+  },
 ];
 
 export default Fields;

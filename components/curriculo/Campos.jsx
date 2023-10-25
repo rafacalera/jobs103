@@ -1,13 +1,41 @@
-import { TextField } from "@mui/material";
+import { TextField } from "../common/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { Select } from "../common/Select";
 import Layout from "./Layout";
 import Fields from "../../helpers/fields";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { updateCurriculum } from "../../redux/curriculum/actions";
+
+const makeFieldComponent = (field, curriculum) => {
+  const key = `field${field.redux}${field.id}`;
+
+  if (field.values) {
+    return (
+      <Select
+        key={key}
+        field={field}
+        curriculum={curriculum}
+        onChange={(e) => {
+          dispatch(updateCurriculum(field.redux, field.id, e.target.value));
+        }}
+      />
+    );
+  }
+
+  return (
+    <TextField
+      key={key}
+      field={field}
+      curriculum={curriculum}
+      onChange={() => {
+        dispatch(updateCurriculum(field.redux, field.id, e.target.value));
+      }}
+    />
+  );
+};
 
 export default () => {
   const dispatch = useDispatch();
@@ -20,78 +48,9 @@ export default () => {
       {currentCurriculum && currentCurriculum.basicInfos
         ? Fields.map((section) => (
             <Layout titulo={section.section}>
-              {section.fields.map((field) => {
-                if (field.values) {
-                  return (
-                    <FormControl
-                      key={`formControl${field.id}`}
-                      variant="standard"
-                      sx={{ minWidth: 200 }}
-                    >
-                      <InputLabel id={field.labelId}>{field.label}</InputLabel>
-                      <Select
-                        labelId={field.labelId}
-                        id={field.id}
-                        label={field.label}
-                        value={currentCurriculum.basicInfos[field.id]}
-                        defaultValue={currentCurriculum.basicInfos[field.id]}
-                        onChange={(e) => {
-                          dispatch(
-                            updateCurriculum(
-                              field.redux,
-                              field.id,
-                              e.target.value,
-                            ),
-                          );
-                        }}
-                      >
-                        {field.values.map((option) => (
-                          <MenuItem
-                            key={`item${option.value}`}
-                            value={option.value}
-                          >
-                            {option.placeholder}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  );
-                } else {
-                  return (
-                    <TextField
-                      key={`textField${field.id}`}
-                      id={field.id}
-                      label={field.label}
-                      type={field.type}
-                      variant="standard"
-                      sx={
-                        field.id === "complemento"
-                          ? { minWidth: 300 }
-                          : { minWidth: 200 }
-                      }
-                      value={
-                        field.id === "primeiroNome"
-                          ? currentCurriculum.basicInfos.nome.split(" ")[0]
-                          : field.id === "sobrenome"
-                          ? currentCurriculum.basicInfos.nome
-                              .split(" ")
-                              .slice(1)
-                              .join(" ")
-                          : currentCurriculum.basicInfos[field.id]
-                      }
-                      onChange={(e) => {
-                        dispatch(
-                          updateCurriculum(
-                            field.redux,
-                            field.id,
-                            e.target.value,
-                          ),
-                        );
-                      }}
-                    />
-                  );
-                }
-              })}
+              {section.fields.map((field) =>
+                makeFieldComponent(field, currentCurriculum),
+              )}
             </Layout>
           ))
         : null}

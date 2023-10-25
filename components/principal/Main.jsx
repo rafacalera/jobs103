@@ -12,10 +12,11 @@ export default (props) => {
       >
         <div>
           <h1>
-            <span>Ache aqui seu</span>{" "}
+            <span>Ache seu</span>{" "}
             <span style={{ color: "#2C4ECA", fontWeight: "700px" }}>
               Emprego
             </span>
+            <span> aqui</span>
           </h1>
           <p>
             Seja você um estudante prestes a ingressar no mercado de trabalho ou
