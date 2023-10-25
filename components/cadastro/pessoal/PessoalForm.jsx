@@ -4,7 +4,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
-import handleEstagio from "./handleEstagio";
+import handleEstagio from "../../../helpers/handlers/handleEndereco";
 
 export default ({
   submitController,

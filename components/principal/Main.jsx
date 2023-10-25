@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import sylvinho from "../../assets/sylvinho fundo.png";
+import sylvinho from "../../public/sylvinho fundo.png";
 import styles from "../../styles/Main.module.css";
 
 export default (props) => {

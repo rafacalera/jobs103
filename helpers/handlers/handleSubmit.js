@@ -1,6 +1,6 @@
 import axios from "axios";
 import { loginUser } from "../../redux/user/actions";
-import handleEndereco from "../cadastro/endereco/handleEndereco";
+import handleEndereco from "./handleEndereco";
 
 function handleSubmit(
   event,

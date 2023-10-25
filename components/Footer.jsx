@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
 
-import curriculumImg from "../assets/curriculum-icon.png";
-import phoneCallImg from "../assets/phone-call.png";
-import facebookImg from "../assets/facebook.png";
-import instagramImg from "../assets/instagram.png";
-import oldPhoneImg from "../assets/old-typical-phone.png";
+import curriculumImg from "../public/curriculum-icon.png";
+import phoneCallImg from "../public/phone-call.png";
+import facebookImg from "../public/facebook.png";
+import instagramImg from "../public/instagram.png";
+import oldPhoneImg from "../public/old-typical-phone.png";
 
 import styles from "../styles/Footer.module.css";
 

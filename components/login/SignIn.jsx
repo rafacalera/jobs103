@@ -13,7 +13,7 @@ import Container from "@mui/material/Container";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import handleLogin from "./handleLogin";
+import handleLogin from "../../helpers/handlers/handleLogin";
 
 export default function SignIn(props) {
   const [isDisabled, setIsDisabled] = useState(false);

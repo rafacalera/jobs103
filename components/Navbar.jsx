@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import curriculumImg from "../assets/curriculum-icon.png";
+import curriculumImg from "../public/curriculum-icon.png";
 import styles from "../styles/Navbar.module.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";

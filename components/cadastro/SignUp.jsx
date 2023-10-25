@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import handleSubmit from "./handleSubmit";
+import handleSubmit from "../../helpers/handlers/handleSubmit";
 
 export default function SignUp(props) {
   const [isDisabled, setIsDisabled] = useState(false);

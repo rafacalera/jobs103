@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { MenuItem } from "@mui/material";
-import checarCep from "./checarCep";
+import checarCep from "../../../helpers/checarCep";
 
 export default (props) => {
   const endereco = props.enderecoController.endereco;
