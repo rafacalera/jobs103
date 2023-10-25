@@ -1,6 +1,6 @@
 const CurriculumActionTypes = {
   ADD: "curriculum/add",
-  LOGOUT: "curriculum/logout",
+  RESET: "curriculum/reset",
   UPDATE_VALUE: "curriculum/update",
 };
 

@@ -5,16 +5,19 @@ import Head from "next/head";
 import Footer from "../components/Footer";
 import DisplayCurriculo from "../components/curriculo/DisplayCurriculo";
 import { useRouter } from "next/router";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/user/actions";
-import { addCurriculum, logoutCurriculum } from "../redux/curriculum/actions";
+import { addCurriculum } from "../redux/curriculum/actions";
 import { CircularProgress } from "@mui/material";
+import getEffect from "../helpers/getEffect";
 
 export default () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
+  const { currentCurriculum } = useSelector(
+    (rootReducer) => rootReducer.curriculumReducer,
+  );
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -24,26 +27,15 @@ export default () => {
   };
 
   useEffect(() => {
-    if (!currentUser) {
-      router.push("/login");
-      return;
-    }
-    axios
-      .get("/api/user/info", {
-        headers: {
-          "x-access-token": currentUser.token,
-        },
-      })
-      .then((response) => {
-        dispatch(addCurriculum({ basicInfos: response.data }));
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err.response.data === "Token expired") router.push("/login");
-        dispatch(logoutUser());
-        dispatch(logoutCurriculum());
-        console.error(err);
-      });
+    getEffect(
+      currentUser,
+      currentCurriculum,
+      router,
+      dispatch,
+      addCurriculum,
+      setLoading,
+      logoutUser,
+    );
   }, []);
 
   return (

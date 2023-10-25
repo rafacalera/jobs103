@@ -2,7 +2,7 @@ import CurriculumActionTypes from "./action-types";
 import { defineState } from "redux-localstore";
 
 const defaultState = {
-  currentCurriculum: [],
+  currentCurriculum: null,
 };
 
 const initialState = defineState(defaultState)("curriculumReducer");
@@ -11,7 +11,7 @@ const curriculumReducer = (state = initialState, action) => {
   switch (action.type) {
     case CurriculumActionTypes.ADD:
       return { ...state, currentCurriculum: action.payload };
-    case CurriculumActionTypes.LOGOUT:
+    case CurriculumActionTypes.RESET:
       return { ...state, currentCurriculum: null };
     case CurriculumActionTypes.UPDATE_VALUE:
       const { section, field, value } = action.payload;

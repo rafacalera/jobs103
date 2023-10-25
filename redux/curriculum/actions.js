@@ -10,6 +10,6 @@ export const updateCurriculum = (section, field, value) => ({
   payload: { section, field, value },
 });
 
-export const logoutCurriculum = () => ({
-  type: CurriculumActionTypes.LOGOUT,
+export const resetCurriculum = () => ({
+  type: CurriculumActionTypes.RESET,
 });

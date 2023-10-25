@@ -6,11 +6,14 @@ import styles from "../styles/Navbar.module.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/user/actions";
+import { resetCurriculum } from "../redux/curriculum/actions";
+import { useRouter } from "next/router";
 
 export default (props) => {
   const [loading, setLoading] = useState(true);
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(false);
@@ -93,7 +96,9 @@ export default (props) => {
                 <Link
                   className={`${styles.aLogin} ${styles.logout}`}
                   onClick={() => {
+                    dispatch(resetCurriculum());
                     dispatch(logoutUser());
+                    router.push("/");
                   }}
                   style={currentUser ? {} : { display: "none" }}
                   href="/"
