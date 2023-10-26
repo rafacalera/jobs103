@@ -18,7 +18,7 @@ const textFieldValue = (curriculum, field) => {
   return "";
 };
 
-const TextFieldComponent = ({ key, field, curriculum, onChange }) => (
+const TextFieldComponent = ({ key, field, value, onChange }) => (
   <TextField
     key={key}
     id={field.id}
@@ -26,9 +26,9 @@ const TextFieldComponent = ({ key, field, curriculum, onChange }) => (
     type={field.type}
     variant="standard"
     sx={field.id === "complemento" ? { minWidth: 300 } : { minWidth: 200 }}
-    value={textFieldValue(curriculum, field)}
+    value={value}
     onChange={onChange}
   />
 );
 
-export { TextFieldComponent as TextField };
+export { TextFieldComponent as TextField, textFieldValue };

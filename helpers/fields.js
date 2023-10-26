@@ -126,6 +126,7 @@ const Fields = [
   },
   {
     section: "Formação Acadêmica",
+    name: "academicEducation",
     type: "list",
     fields: [
       {
@@ -145,6 +146,11 @@ const Fields = [
         label: "Grau de Formação",
         type: "text",
         redux: "academicEducation",
+        values: [
+          { placeholder: "Superior", value: "Superior" },
+          { placeholder: "Técnico", value: "Tecnico" },
+          { placeholder: "Médio", value: "Medio" },
+        ],
       },
       {
         id: "dataInicio",
@@ -157,6 +163,19 @@ const Fields = [
         label: "Data Fim",
         type: "text",
         redux: "academicEducation",
+      },
+    ],
+  },
+  {
+    section: "Outros Conhecimentos",
+    name: "otherKnowledge",
+    type: "list",
+    fields: [
+      {
+        id: "conhecimento",
+        label: "Conhecimento",
+        type: "text",
+        redux: "otherKnowledge",
       },
     ],
   },
