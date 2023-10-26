@@ -12,9 +12,17 @@ import {
   TableHead,
   TableRow,
   tableCellClasses,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
 } from "@mui/material";
+import { Delete, DeleteOutline, Height } from "@mui/icons-material/";
 import { styled } from "@mui/material/styles";
-import { updateCurriculum } from "../../redux/curriculum/actions";
+import {
+  updateCurriculum,
+  deleteFromCurriculum,
+} from "../../redux/curriculum/actions";
 import { useState } from "react";
 
 const itemsField = "items";
@@ -35,8 +43,8 @@ const valueFrom = (curriculum, section, field) => {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.common.white,
+    color: "#333",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -45,7 +53,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: "#D3D3D3",
   },
   // hide last border
   "&:last-child td, &:last-child th": {
@@ -63,27 +71,71 @@ const BoardComponent = ({ fieldSection, fieldName }) => {
 
   return (
     <>
-      {(fields || []).map((field) => {
-        const action = (e) => {
-          const fieldId = field.id;
+      <List sx={{ width: "100%", bgcolor: "commom.white" }}>
+        {valueFrom(currentCurriculum, fieldName, itemsField).map((row) => (
+          <ListItem
+            key={row.name}
+            secondaryAction={
+              <IconButton
+                aria-label="comment"
+                onClick={() => {
+                  dispatch(deleteFromCurriculum(fieldName, row));
+                }}
+              >
+                <DeleteOutline />
+              </IconButton>
+            }
+          >
+            {fields.map((f) => (
+              <ListItemText primary={row[f.id]} />
+            ))}
+            {/* <ListItemText primary={row.curso} /> */}
+          </ListItem>
+        ))}
+      </List>
 
-          const obj = {
-            ...data,
-          };
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "20px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            gap: "20px",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          {(fields || []).map((field) => {
+            const action = (e) => {
+              const fieldId = field.id;
 
-          obj[fieldId] = e.target.value;
+              const obj = {
+                ...data,
+              };
 
-          setData(obj);
-        };
+              obj[fieldId] = e.target.value;
 
-        const value = (data || {})[field.id] || "";
+              setData(obj);
+            };
 
-        return makeFieldComponent(field, value, action);
-      })}
+            const value = (data || {})[field.id] || "";
 
-      <Stack spacing={2} direction="row">
+            return makeFieldComponent(field, value, action);
+          })}
+        </div>
+
         <Button
           variant="contained"
+          sx={{
+            minWidth: "200px",
+            maxWidth: "300px",
+          }}
           onClick={() => {
             dispatch(
               updateCurriculum(fieldName, itemsField, [
@@ -91,13 +143,14 @@ const BoardComponent = ({ fieldSection, fieldName }) => {
                 ...valueFrom(currentCurriculum, fieldName, itemsField),
               ]),
             );
+            setData("");
           }}
         >
           Adicionar
         </Button>
-      </Stack>
+      </div>
 
-      <TableContainer component={Paper}>
+      {/* <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -116,7 +169,7 @@ const BoardComponent = ({ fieldSection, fieldName }) => {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer> */}
     </>
   );
 };

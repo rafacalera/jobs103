@@ -3,6 +3,12 @@
   min-height: "200px";
 }
 
+.conteudoTitle {
+  display: flex;
+  gap: 16px;
+  cursor: pointer;
+}
+
 .conteudoChildren {
   display: flex;
   justify-content: center;

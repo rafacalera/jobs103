@@ -8,7 +8,7 @@ const textFieldValue = (curriculum, field) => {
   }
 
   if (field.id === "sobrenome") {
-    redux?.nome?.split(" ").slice(1).join(" ") || "";
+    return redux?.nome?.split(" ").slice(1).join(" ") || "";
   }
 
   if (redux) {

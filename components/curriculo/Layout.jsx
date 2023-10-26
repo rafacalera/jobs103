@@ -1,20 +1,22 @@
 import Typography from "@mui/material/Typography";
 import styles from "../../styles/LayoutCurriculo.module.css";
 import { useState } from "react";
+import { ChevronDown, ChevronUp } from "../Icone";
 
 export default (props) => {
   const [exibirConteudo, setExibirConteudo] = useState(true);
 
   return (
     <div className={styles.conteudo} key={props.titulo}>
-      <Typography
-        component="h1"
-        variant="h5"
-        style={{ cursor: "pointer" }}
-        onClick={(_) => setExibirConteudo(!exibirConteudo)}
+      <div
+        className={styles.conteudoTitle}
+        onClick={() => setExibirConteudo(!exibirConteudo)}
       >
-        {props.titulo}
-      </Typography>
+        {exibirConteudo ? ChevronDown : ChevronUp}
+        <Typography component="h1" variant="h5" style={{ cursor: "pointer" }}>
+          {props.titulo}
+        </Typography>
+      </div>
       <div
         className={
           exibirConteudo

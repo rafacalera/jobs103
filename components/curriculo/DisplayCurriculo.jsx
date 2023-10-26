@@ -1,6 +1,6 @@
-import styles from "../../styles/CurriculoBody.module.css";
+import styles from "../../styles/DisplayCurriculo.module.css";
 import Campos from "./Campos";
-import { ChevronDown } from "../Icone";
+import { ChevronDown, ChevronUp } from "../Icone";
 import { useState } from "react";
 
 export default () => {
@@ -13,7 +13,7 @@ export default () => {
         style={exibirCurriculo ? {} : { borderRadius: "25px" }}
         onClick={(_) => setExibirCurriculo(!exibirCurriculo)}
       >
-        {ChevronDown}
+        {exibirCurriculo ? ChevronDown : ChevronUp}
         <p>Currículo</p>
       </div>
       <div

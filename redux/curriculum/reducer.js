@@ -25,6 +25,22 @@ const curriculumReducer = (state = initialState, action) => {
           },
         },
       };
+    case CurriculumActionTypes.DELETE_FROM_ARRAY:
+      const { sessao, valor } = action.payload;
+      const newArray = state.currentCurriculum[sessao].items.filter(
+        (value) => value !== valor,
+      );
+
+      return {
+        ...state,
+        currentCurriculum: {
+          ...state.currentCurriculum,
+          [sessao]: {
+            ...state.currentCurriculum[sessao],
+            items: newArray,
+          },
+        },
+      };
     default:
       return state;
   }
