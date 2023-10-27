@@ -1,5 +1,6 @@
 import { TextField, textFieldValue } from "../common/TextField";
 import { Select } from "../common/Select";
+import { DateField } from "./DateField";
 
 const makeFieldComponentFromCurriculum = (field, curriculum, action) =>
   makeFieldComponent(
@@ -18,6 +19,16 @@ const makeFieldComponent = (field, value, action) => {
         field={field}
         value={value}
         defaultValue={value}
+        onChange={action}
+      />
+    );
+  }
+  if (field.type === "date") {
+    return (
+      <DateField
+        key={`date${field.id}`}
+        field={field}
+        value={value}
         onChange={action}
       />
     );

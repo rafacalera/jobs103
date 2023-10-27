@@ -155,13 +155,13 @@ const Fields = [
       {
         id: "dataInicio",
         label: "Data Inicio",
-        type: "text",
+        type: "date",
         redux: "academicEducation",
       },
       {
         id: "dataFim",
         label: "Data Fim",
-        type: "text",
+        type: "date",
         redux: "academicEducation",
       },
     ],

@@ -2,16 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeFieldComponent } from "./util";
 import {
   Button,
-  Card,
-  Paper,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  tableCellClasses,
   List,
   ListItem,
   ListItemText,
@@ -24,6 +14,7 @@ import {
   deleteFromCurriculum,
 } from "../../redux/curriculum/actions";
 import { useState } from "react";
+import useWindowDimensions from "./useWindowDimensions";
 
 const itemsField = "items";
 
@@ -41,27 +32,20 @@ const valueFrom = (curriculum, section, field) => {
   return [];
 };
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.white,
-    color: "#333",
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: "#D3D3D3",
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+const handleSizeChanges = (width, row, fields) => {
+  if (width < 900 && row.instituicao) {
+    return (
+      <>
+        <ListItemText primary={row.instituicao} />
+        <ListItemText primary={row.curso} />
+      </>
+    );
+  }
+  return fields.map((f) => <ListItemText primary={row[f.id]} />);
+};
 
 const BoardComponent = ({ fieldSection, fieldName }) => {
+  const { width } = useWindowDimensions();
   const dispatch = useDispatch();
   const { fields } = fieldSection;
   const [data, setData] = useState();
@@ -72,26 +56,25 @@ const BoardComponent = ({ fieldSection, fieldName }) => {
   return (
     <>
       <List sx={{ width: "100%", bgcolor: "commom.white" }}>
-        {valueFrom(currentCurriculum, fieldName, itemsField).map((row) => (
-          <ListItem
-            key={row.name}
-            secondaryAction={
-              <IconButton
-                aria-label="comment"
-                onClick={() => {
-                  dispatch(deleteFromCurriculum(fieldName, row));
-                }}
-              >
-                <DeleteOutline />
-              </IconButton>
-            }
-          >
-            {fields.map((f) => (
-              <ListItemText primary={row[f.id]} />
-            ))}
-            {/* <ListItemText primary={row.curso} /> */}
-          </ListItem>
-        ))}
+        {valueFrom(currentCurriculum, fieldName, itemsField).map(
+          (row, index) => (
+            <ListItem
+              key={`${row.name}${index}}`}
+              secondaryAction={
+                <IconButton
+                  aria-label="comment"
+                  onClick={() => {
+                    dispatch(deleteFromCurriculum(fieldName, row));
+                  }}
+                >
+                  <DeleteOutline />
+                </IconButton>
+              }
+            >
+              {handleSizeChanges(width, row, fields)}
+            </ListItem>
+          ),
+        )}
       </List>
 
       <div
@@ -149,27 +132,6 @@ const BoardComponent = ({ fieldSection, fieldName }) => {
           Adicionar
         </Button>
       </div>
-
-      {/* <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              {fields.map((f) => (
-                <StyledTableCell>{f.label}</StyledTableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {valueFrom(currentCurriculum, fieldName, itemsField).map((row) => (
-              <StyledTableRow key={row.name}>
-                {fields.map((f) => (
-                  <StyledTableCell>{row[f.id]}</StyledTableCell>
-                ))}
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer> */}
     </>
   );
 };
