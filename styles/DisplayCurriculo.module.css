@@ -2,12 +2,9 @@
   padding: 0;
   margin: 0;
   width: 66%;
-}
-
-.divTitle p {
-  font-weight: 500;
-  font-size: 20px;
-  color: #333;
+  background-color: white;
+  border-radius: 25px;
+  padding-bottom: 50px;
 }
 
 .divTitle {
@@ -17,8 +14,6 @@
   display: flex;
   gap: 16px;
   align-items: center;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
   cursor: pointer;
   width: (100% - 50px);
   transition: 0.5s;
@@ -27,6 +22,7 @@
 .divCurriculo {
   margin-top: 25px;
   margin-left: 50px;
+  margin-right: 50px;
   display: flex;
   gap: 80px;
   flex-direction: column;
@@ -36,6 +32,7 @@
 @media (max-width: 670px) {
   .divConteudo {
     padding: 0;
+    padding-bottom: 50px;
     margin: 0;
     width: 100%;
   }
@@ -44,5 +41,6 @@
 @media (max-width: 1055px) {
   .divCurriculo {
     margin-left: 15px;
+    margin-right: 15px;
   }
 }

@@ -144,12 +144,12 @@ const Fields = [
       {
         id: "grauFormacao",
         label: "Grau de Formação",
-        type: "text",
+        //type: "text",
         redux: "academicEducation",
         values: [
-          { placeholder: "Superior", value: "Superior" },
-          { placeholder: "Técnico", value: "Tecnico" },
-          { placeholder: "Médio", value: "Medio" },
+          { placeholder: "Superior", value: "COLLEGE_DEGREE" },
+          { placeholder: "Técnico", value: "TECHNICAL_DEGREE" },
+          { placeholder: "Médio", value: "BASIC_DEGREE" },
         ],
       },
       {
@@ -164,18 +164,132 @@ const Fields = [
         type: "date",
         redux: "academicEducation",
       },
+      {
+        id: "totalHoras",
+        label: "Total de Horas",
+        type: "number",
+        redux: "academicEducation",
+      },
+    ],
+  },
+  {
+    section: "Cursos Extracurriculares",
+    name: "extraCourses",
+    type: "list",
+    fields: [
+      {
+        id: "instituicao",
+        label: "Instituição",
+        type: "text",
+        redux: "extraCourses",
+      },
+      {
+        id: "curso",
+        label: "Curso",
+        type: "text",
+        redux: "extraCourses",
+      },
+      {
+        id: "tipo",
+        label: "Tipo",
+        //type: "text",
+        values: [
+          { placeholder: "Curso", value: "COURSE" },
+          { placeholder: "Palestra", value: "LECTURE" },
+        ],
+        redux: "extraCourses",
+      },
+      {
+        id: "dataInicio",
+        label: "Data Inicio",
+        type: "date",
+        redux: "extraCourses",
+      },
+      {
+        id: "dataFim",
+        label: "Data Fim",
+        type: "date",
+        redux: "extraCourses",
+      },
+      {
+        id: "totalHoras",
+        label: "Total de Horas",
+        type: "number",
+        redux: "extraCourses",
+      },
+    ],
+  },
+  {
+    section: "Experiências Profissionais",
+    name: "profissionalExpirience",
+    type: "list",
+    fields: [
+      {
+        id: "empresa",
+        label: "Empresa",
+        type: "text",
+        redux: "profissionalExpirience",
+      },
+      {
+        id: "cargo",
+        label: "Cargo",
+        type: "text",
+        redux: "profissionalExpirience",
+      },
+      {
+        id: "descricao",
+        label: "Descrição",
+        type: "text",
+        redux: "profissionalExpirience",
+      },
+      {
+        id: "dataInicio",
+        label: "Data Inicio",
+        type: "date",
+        redux: "profissionalExpirience",
+      },
+      {
+        id: "dataFim",
+        label: "Data Fim",
+        type: "date",
+        redux: "profissionalExpirience",
+      },
+    ],
+  },
+  {
+    section: "Idiomas",
+    name: "language",
+    type: "list",
+    fields: [
+      {
+        id: "idioma",
+        label: "Idioma",
+        type: "text",
+        redux: "language",
+      },
+      {
+        id: "nivel",
+        label: "Nivel",
+        //type: "text",
+        redux: "language",
+        values: [
+          { placeholder: "Avançado", value: "ADVANCED" },
+          { placeholder: "Intermediário", value: "INTERMEDIARY" },
+          { placeholder: "Básico", value: "BASIC" },
+        ],
+      },
     ],
   },
   {
     section: "Outros Conhecimentos",
-    name: "otherKnowledge",
+    name: "commonKnowledge",
     type: "list",
     fields: [
       {
         id: "conhecimento",
         label: "Conhecimento",
         type: "text",
-        redux: "otherKnowledge",
+        redux: "commonKnowledge",
       },
     ],
   },

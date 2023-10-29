@@ -13,7 +13,11 @@ export default (props) => {
         onClick={() => setExibirConteudo(!exibirConteudo)}
       >
         {exibirConteudo ? ChevronDown : ChevronUp}
-        <Typography component="h1" variant="h5" style={{ cursor: "pointer" }}>
+        <Typography
+          component="h3"
+          variant="h5"
+          sx={{ fontSize: "1.25rem", fontWeight: "600", cursor: "pointer" }}
+        >
           {props.titulo}
         </Typography>
       </div>

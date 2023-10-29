@@ -33,6 +33,16 @@ const valueFrom = (curriculum, section, field) => {
 };
 
 const handleSizeChanges = (width, row, fields) => {
+  const newFields = fields.filter(
+    (f) =>
+      f.id !== "dataInicio" &&
+      f.id !== "dataFim" &&
+      f.id !== "grauFormacao" &&
+      f.id !== "tipo" &&
+      f.id !== "nivel" &&
+      f.id !== "totalHoras",
+  );
+
   if (width < 900 && row.instituicao) {
     return (
       <>
@@ -41,7 +51,7 @@ const handleSizeChanges = (width, row, fields) => {
       </>
     );
   }
-  return fields.map((f) => <ListItemText primary={row[f.id]} />);
+  return newFields.map((f) => <ListItemText primary={row[f.id]} />);
 };
 
 const BoardComponent = ({ fieldSection, fieldName }) => {
@@ -120,12 +130,14 @@ const BoardComponent = ({ fieldSection, fieldName }) => {
             maxWidth: "300px",
           }}
           onClick={() => {
-            dispatch(
-              updateCurriculum(fieldName, itemsField, [
-                data,
-                ...valueFrom(currentCurriculum, fieldName, itemsField),
-              ]),
-            );
+            !data
+              ? alert("Preencha os campos")
+              : dispatch(
+                  updateCurriculum(fieldName, itemsField, [
+                    data,
+                    ...valueFrom(currentCurriculum, fieldName, itemsField),
+                  ]),
+                );
             setData("");
           }}
         >

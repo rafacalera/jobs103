@@ -2,6 +2,7 @@ import styles from "../../styles/DisplayCurriculo.module.css";
 import Campos from "./Campos";
 import { ChevronDown, ChevronUp } from "../Icone";
 import { useState } from "react";
+import { Typography } from "@mui/material";
 
 export default () => {
   const [exibirCurriculo, setExibirCurriculo] = useState(true);
@@ -10,11 +11,16 @@ export default () => {
     <div className={styles.divConteudo}>
       <div
         className={styles.divTitle}
-        style={exibirCurriculo ? {} : { borderRadius: "25px" }}
-        onClick={(_) => setExibirCurriculo(!exibirCurriculo)}
+        onClick={() => setExibirCurriculo(!exibirCurriculo)}
       >
         {exibirCurriculo ? ChevronDown : ChevronUp}
-        <p>Currículo</p>
+        <Typography
+          component="h1"
+          variant="h5"
+          sx={{ fontWeight: "800", cursor: "pointer" }}
+        >
+          Currículo
+        </Typography>
       </div>
       <div
         className={styles.divCurriculo}
