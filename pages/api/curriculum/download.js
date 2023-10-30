@@ -109,5 +109,4 @@ export async function postDownload(req, res) {
     });
 }
 
-// export default verifyJWT(postDownload);
-export default postDownload;
+export default verifyJWT(postDownload);

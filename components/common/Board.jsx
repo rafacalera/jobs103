@@ -35,11 +35,12 @@ const valueFrom = (curriculum, section, field) => {
 const handleSizeChanges = (width, row, fields) => {
   const newFields = fields.filter(
     (f) =>
-      f.id !== "dataInicio" &&
-      f.id !== "dataFim" &&
+      // f.id !== "dataInicio" &&
+      // f.id !== "dataFim" &&
       f.id !== "grauFormacao" &&
       f.id !== "tipo" &&
       f.id !== "nivel" &&
+      f.id !== "descricao" &&
       f.id !== "totalHoras",
   );
 
@@ -48,6 +49,24 @@ const handleSizeChanges = (width, row, fields) => {
       <>
         <ListItemText primary={row.instituicao} />
         <ListItemText primary={row.curso} />
+      </>
+    );
+  }
+
+  if (width < 900 && row.instituicao) {
+    return (
+      <>
+        <ListItemText primary={row.instituicao} />
+        <ListItemText primary={row.curso} />
+      </>
+    );
+  }
+
+  if (width < 900 && row.empresa) {
+    return (
+      <>
+        <ListItemText primary={row.empresa} />
+        <ListItemText primary={row.cargo} />
       </>
     );
   }

@@ -166,7 +166,7 @@ const Fields = [
       },
       {
         id: "totalHoras",
-        label: "Total de Horas",
+        label: "Carga Horária",
         type: "number",
         redux: "academicEducation",
       },
@@ -213,7 +213,7 @@ const Fields = [
       },
       {
         id: "totalHoras",
-        label: "Total de Horas",
+        label: "Carga Horária",
         type: "number",
         redux: "extraCourses",
       },
@@ -221,38 +221,38 @@ const Fields = [
   },
   {
     section: "Experiências Profissionais",
-    name: "profissionalExpirience",
+    name: "professionalExperience",
     type: "list",
     fields: [
       {
         id: "empresa",
         label: "Empresa",
         type: "text",
-        redux: "profissionalExpirience",
+        redux: "professionalExperience",
       },
       {
         id: "cargo",
         label: "Cargo",
         type: "text",
-        redux: "profissionalExpirience",
+        redux: "professionalExperience",
       },
       {
         id: "descricao",
         label: "Descrição",
         type: "text",
-        redux: "profissionalExpirience",
+        redux: "professionalExperience",
       },
       {
         id: "dataInicio",
         label: "Data Inicio",
         type: "date",
-        redux: "profissionalExpirience",
+        redux: "professionalExperience",
       },
       {
         id: "dataFim",
         label: "Data Fim",
         type: "date",
-        redux: "profissionalExpirience",
+        redux: "professionalExperience",
       },
     ],
   },
