@@ -51,7 +51,7 @@ export async function postDownload(req, res) {
   });
 
   const extraCoursesJSON = [];
-  extraCourses.items.forEach((item) => {
+  extraCourses?.items.forEach((item) => {
     extraCoursesJSON.push({
       institution: item.instituicao,
       course: item.curso,
@@ -63,7 +63,7 @@ export async function postDownload(req, res) {
   });
 
   const languagesJSON = [];
-  language.items.forEach((item) => {
+  language?.items.forEach((item) => {
     languagesJSON.push({
       language: item.idioma,
       level: item.nivel,
@@ -72,13 +72,13 @@ export async function postDownload(req, res) {
 
   const commonKnowledgeJSON = [];
 
-  commonKnowledge.items.forEach((item) => {
+  commonKnowledge?.items.forEach((item) => {
     commonKnowledgeJSON.push(item.conhecimento);
   });
 
   const professionalExperienceJSON = [];
 
-  professionalExperience.items.forEach((item) => {
+  professionalExperience?.items.forEach((item) => {
     professionalExperienceJSON.push({
       company: item.empresa,
       job: item.cargo,
@@ -109,4 +109,5 @@ export async function postDownload(req, res) {
     });
 }
 
-export default verifyJWT(postDownload);
+// export default verifyJWT(postDownload);
+export default postDownload;

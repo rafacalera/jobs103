@@ -1,19 +1,17 @@
 import { DateField } from "@mui/x-date-pickers";
 import { useState } from "react";
 
-const DateFieldComponent = ({ key, field, value, onChange }) => {
-  const [helperText, setHelperText] = useState("Ano e Mês");
-
+const DateFieldComponent = ({ key, field, value, onChange, error }) => {
   return (
     <DateField
+      error={error?.[field.redux]?.[field.id]?.length > 0 ? true : false}
       key={key}
       label={field.label}
       value={value || null}
       variant="standard"
       format={"YYYY-MM"}
       onBlur={onChange}
-      onClick={() => setHelperText("")}
-      helperText={helperText}
+      helperText={error?.[field.redux]?.[field.id] ?? ""}
     />
   );
 };

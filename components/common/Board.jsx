@@ -7,14 +7,15 @@ import {
   ListItemText,
   IconButton,
 } from "@mui/material";
-import { Delete, DeleteOutline, Height } from "@mui/icons-material/";
-import { styled } from "@mui/material/styles";
+import { DeleteOutline } from "@mui/icons-material/";
+
 import {
   updateCurriculum,
   deleteFromCurriculum,
 } from "../../redux/curriculum/actions";
 import { useState } from "react";
 import useWindowDimensions from "./useWindowDimensions";
+import { onAdd } from "../../helpers/handlers/handleAdd";
 
 const itemsField = "items";
 
@@ -36,7 +37,7 @@ const handleSizeChanges = (width, row, fields) => {
   const newFields = fields.filter(
     (f) =>
       // f.id !== "dataInicio" &&
-      // f.id !== "dataFim" &&
+      f.id !== "dataFim" &&
       f.id !== "grauFormacao" &&
       f.id !== "tipo" &&
       f.id !== "nivel" &&
@@ -78,6 +79,7 @@ const BoardComponent = ({ fieldSection, fieldName }) => {
   const dispatch = useDispatch();
   const { fields } = fieldSection;
   const [data, setData] = useState();
+  const [error, setError] = useState({});
   const { currentCurriculum } = useSelector(
     (rootReducer) => rootReducer.curriculumReducer,
   );
@@ -138,7 +140,7 @@ const BoardComponent = ({ fieldSection, fieldName }) => {
 
             const value = (data || {})[field.id] || "";
 
-            return makeFieldComponent(field, value, action);
+            return makeFieldComponent(field, value, action, error);
           })}
         </div>
 
@@ -148,16 +150,20 @@ const BoardComponent = ({ fieldSection, fieldName }) => {
             minWidth: "200px",
             maxWidth: "300px",
           }}
-          onClick={() => {
-            !data
-              ? alert("Preencha os campos")
-              : dispatch(
-                  updateCurriculum(fieldName, itemsField, [
-                    data,
-                    ...valueFrom(currentCurriculum, fieldName, itemsField),
-                  ]),
-                );
-            setData("");
+          disabled={!data}
+          onClick={(e) => {
+            onAdd(
+              fieldName,
+              setData,
+              data,
+              setError,
+              dispatch,
+              updateCurriculum,
+              itemsField,
+              valueFrom,
+              currentCurriculum,
+            );
+            console.log(error);
           }}
         >
           Adicionar

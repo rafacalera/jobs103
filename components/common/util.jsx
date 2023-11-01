@@ -11,7 +11,7 @@ const makeFieldComponentFromCurriculum = (field, curriculum, action) =>
     action,
   );
 
-const makeFieldComponent = (field, value, action) => {
+const makeFieldComponent = (field, value, action, error) => {
   if (field.values) {
     return (
       <Select
@@ -20,6 +20,7 @@ const makeFieldComponent = (field, value, action) => {
         value={value}
         defaultValue={value}
         onChange={action}
+        error={error}
       />
     );
   }
@@ -30,6 +31,7 @@ const makeFieldComponent = (field, value, action) => {
         field={field}
         value={value}
         onChange={action}
+        error={error}
       />
     );
   }
@@ -40,6 +42,7 @@ const makeFieldComponent = (field, value, action) => {
       field={field}
       value={value}
       onChange={action}
+      error={error}
     />
   );
 };
