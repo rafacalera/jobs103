@@ -39,25 +39,27 @@ export async function postDownload(req, res) {
   };
 
   const academicEducationJSON = [];
-  academicEducation.items.forEach((item) => {
+  academicEducation?.items.forEach((item) => {
+    const dataFim = item.dataFim === "YYYY-MM" ? undefined : item.dataFim;
     academicEducationJSON.push({
       degree: item.grauFormacao,
       institution: item.instituicao,
       course: item.curso,
       from: item.dataInicio,
-      to: item.dataFim,
+      to: dataFim,
       amountHours: parseInt(item.totalHoras),
     });
   });
 
   const extraCoursesJSON = [];
   extraCourses?.items.forEach((item) => {
+    const dataFim = item.dataFim === "YYYY-MM" ? undefined : item.dataFim;
     extraCoursesJSON.push({
       institution: item.instituicao,
       course: item.curso,
       type: item.tipo,
       from: item.dataInicio,
-      to: item.dataFim,
+      to: dataFim,
       amountHours: parseInt(item.totalHoras),
     });
   });
@@ -79,12 +81,14 @@ export async function postDownload(req, res) {
   const professionalExperienceJSON = [];
 
   professionalExperience?.items.forEach((item) => {
+    const dataFim = item.dataFim === "YYYY-MM" ? undefined : item.dataFim;
+
     professionalExperienceJSON.push({
       company: item.empresa,
       job: item.cargo,
       description: item.descricao,
       start: item.dataInicio,
-      end: item.dataFim,
+      end: dataFim,
     });
   });
 

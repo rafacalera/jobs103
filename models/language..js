@@ -14,7 +14,7 @@ const Language = database.define("idioma", {
     allowNull: false,
   },
   linguagem: {
-    type: Sequelize.STRING(100),
+    type: Sequelize.STRING(255),
     allowNull: false,
   },
   nivel: {

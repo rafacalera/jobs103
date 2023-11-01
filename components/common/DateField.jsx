@@ -8,6 +8,7 @@ const DateFieldComponent = ({ key, field, value, onChange, error }) => {
       key={key}
       label={field.label}
       value={value || null}
+      required={field.required}
       variant="standard"
       format={"YYYY-MM"}
       onBlur={onChange}

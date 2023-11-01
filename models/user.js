@@ -9,11 +9,11 @@ const User = database.define("Aluno", {
     primaryKey: true,
   },
   nome: {
-    type: Sequelize.STRING(200),
+    type: Sequelize.STRING(255),
     allowNull: false,
   },
   email: {
-    type: Sequelize.STRING(200),
+    type: Sequelize.STRING(255),
     allowNull: false,
     unique: true,
   },

@@ -13,7 +13,9 @@ const SelectComponent = ({
   error,
 }) => (
   <FormControl key={key} variant="standard" sx={{ width: 200 }}>
-    <InputLabel id={field.labelId}>{field.label}</InputLabel>
+    <InputLabel id={field.labelId} required={field.required}>
+      {field.label}
+    </InputLabel>
     <Select
       error={error?.[field.redux]?.[field.id]?.length > 0 ? true : false}
       labelId={field.labelId}

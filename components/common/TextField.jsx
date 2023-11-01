@@ -20,6 +20,7 @@ const textFieldValue = (curriculum, field) => {
 
 const TextFieldComponent = ({ key, field, value, onChange, error }) => (
   <TextField
+    required={field.required}
     error={error?.[field.redux]?.[field.id]?.length > 0 ? true : false}
     key={key}
     id={field.id}
@@ -30,6 +31,7 @@ const TextFieldComponent = ({ key, field, value, onChange, error }) => (
     value={value}
     onChange={onChange}
     helperText={error?.[field.redux]?.[field.id] ?? ""}
+    disabled={field.disabled}
   />
 );
 

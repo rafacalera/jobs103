@@ -30,23 +30,28 @@ const estados = [
 
 const Fields = [
   {
-    section: "Informações Pessoais",
+    section: "* Informações Pessoais",
     fields: [
       {
         id: "primeiroNome",
         label: "Nome",
         type: "text",
+        required: true,
         redux: "basicInfos",
+        disabled: true,
       },
       {
         id: "sobrenome",
         label: "Sobrenome",
         type: "text",
+        required: true,
         redux: "basicInfos",
+        disabled: true,
       },
       {
         labelId: "inputEstadoCivl",
         id: "estadoCivil",
+        required: true,
         label: "Estado Civil",
         redux: "basicInfos",
         values: [
@@ -58,8 +63,10 @@ const Fields = [
       {
         id: "email",
         label: "E-mail",
+        required: true,
         type: "email",
         redux: "basicInfos",
+        disabled: true,
       },
       {
         id: "telefone",
@@ -71,6 +78,7 @@ const Fields = [
       {
         id: "nascidoEm",
         label: "Cidadade natal",
+        required: true,
         redux: "basicInfos",
       },
     ],
@@ -81,30 +89,39 @@ const Fields = [
       {
         id: "cep",
         label: "Cep",
+        required: true,
         type: "number",
         redux: "basicInfos",
       },
       {
         id: "bairro",
         label: "Bairro",
+        required: true,
+
         type: "text",
         redux: "basicInfos",
       },
       {
         id: "logradouro",
         label: "Rua",
+        required: true,
+
         type: "text",
         redux: "basicInfos",
       },
       {
         id: "numero",
         label: "Número",
+        required: true,
+
         type: "number",
         redux: "basicInfos",
       },
       {
         id: "cidade",
         label: "Cidade",
+        required: true,
+
         type: "text",
         redux: "basicInfos",
       },
@@ -112,12 +129,16 @@ const Fields = [
         labelId: "inputUf",
         id: "uf",
         label: "Estado",
+        required: true,
+
         redux: "basicInfos",
         values: estados,
       },
       {
         id: "complemento",
         label: "Complemento",
+        required: true,
+
         type: "text",
         redux: "basicInfos",
       },
@@ -131,18 +152,22 @@ const Fields = [
       {
         id: "instituicao",
         label: "Instituição",
+        required: true,
         type: "text",
         redux: "academicEducation",
       },
       {
         id: "curso",
         label: "Curso",
+        required: true,
+
         type: "text",
         redux: "academicEducation",
       },
       {
         id: "grauFormacao",
         label: "Grau de Formação",
+        required: true,
         //type: "text",
         redux: "academicEducation",
         values: [
@@ -153,19 +178,23 @@ const Fields = [
       },
       {
         id: "dataInicio",
-        label: "Data Inicio",
+        label: "Data de início",
+        required: true,
+
         type: "date",
         redux: "academicEducation",
       },
       {
         id: "dataFim",
-        label: "Data Fim",
+        label: "Data de conclusão",
         type: "date",
         redux: "academicEducation",
       },
       {
         id: "totalHoras",
         label: "Carga Horária",
+        required: true,
+
         type: "number",
         redux: "academicEducation",
       },
@@ -179,18 +208,24 @@ const Fields = [
       {
         id: "instituicao",
         label: "Instituição",
+        required: true,
+
         type: "text",
         redux: "extraCourses",
       },
       {
         id: "curso",
         label: "Curso",
+        required: true,
+
         type: "text",
         redux: "extraCourses",
       },
       {
         id: "tipo",
         label: "Tipo",
+        required: true,
+
         //type: "text",
         values: [
           { placeholder: "Curso", value: "COURSE" },
@@ -200,19 +235,23 @@ const Fields = [
       },
       {
         id: "dataInicio",
-        label: "Data Inicio",
+
+        label: "Data de início",
+        required: true,
         type: "date",
         redux: "extraCourses",
       },
       {
         id: "dataFim",
-        label: "Data Fim",
+        label: "Data de conclusão",
         type: "date",
         redux: "extraCourses",
       },
       {
         id: "totalHoras",
         label: "Carga Horária",
+        required: true,
+
         type: "number",
         redux: "extraCourses",
       },
@@ -226,30 +265,36 @@ const Fields = [
       {
         id: "empresa",
         label: "Empresa",
+        required: true,
+
         type: "text",
         redux: "professionalExperience",
       },
       {
         id: "cargo",
         label: "Cargo",
+        required: true,
+
         type: "text",
         redux: "professionalExperience",
       },
       {
         id: "descricao",
-        label: "Descrição",
+        label: "Descrição das atividades",
         type: "text",
         redux: "professionalExperience",
       },
       {
         id: "dataInicio",
-        label: "Data Inicio",
+        label: "Data de início",
+        required: true,
+
         type: "date",
         redux: "professionalExperience",
       },
       {
         id: "dataFim",
-        label: "Data Fim",
+        label: "Data de encerramento",
         type: "date",
         redux: "professionalExperience",
       },
@@ -263,12 +308,16 @@ const Fields = [
       {
         id: "idioma",
         label: "Idioma",
+        required: true,
+
         type: "text",
         redux: "language",
       },
       {
         id: "nivel",
         label: "Nivel",
+        required: true,
+
         //type: "text",
         redux: "language",
         values: [
@@ -287,6 +336,8 @@ const Fields = [
       {
         id: "conhecimento",
         label: "Conhecimento",
+        required: true,
+
         type: "text",
         redux: "commonKnowledge",
       },

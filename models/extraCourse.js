@@ -14,11 +14,11 @@ const ExtraCourse = database.define("cursoExtracurricular", {
     allowNull: false,
   },
   instituicao: {
-    type: Sequelize.STRING(150),
+    type: Sequelize.STRING(255),
     allowNull: false,
   },
   curso: {
-    type: Sequelize.STRING(100),
+    type: Sequelize.STRING(255),
     allowNull: false,
   },
   tipo: {

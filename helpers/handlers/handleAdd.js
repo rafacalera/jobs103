@@ -6,6 +6,10 @@ const requiredFields = {
     "dataInicio",
     "totalHoras",
   ],
+  extraCourses: ["instituicao", "curso", "tipo", "dataInicio", "totalHoras"],
+  professionalExperience: ["empresa", "cargo", "dataInicio"],
+  language: ["idioma", "nivel"],
+  commonKnowledge: ["conhecimento"],
 };
 
 export const onAdd = async (
@@ -25,14 +29,15 @@ export const onAdd = async (
     if (
       !data.hasOwnProperty(field) ||
       data[field].trim().length === 0 ||
-      data.dataInicio === "YYYY-MM"
+      data.dataInicio === "YYYY-MM" ||
+      data[field].length === 255
     ) {
       status = false;
       setError((prev) => ({
         ...prev,
         [section]: {
           ...prev[section],
-          [field]: "Preencha o campo corretamente",
+          [field]: "Preencha corretamente",
         },
       }));
     } else {

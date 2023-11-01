@@ -10,11 +10,11 @@ const ProfissionalExpirience = database.define("experienciaProfissional", {
     primaryKey: true,
   },
   empresa: {
-    type: Sequelize.STRING(150),
+    type: Sequelize.STRING(255),
     allowNull: false,
   },
   cargo: {
-    type: Sequelize.STRING(100),
+    type: Sequelize.STRING(255),
     allowNull: false,
   },
   descricao: Sequelize.TEXT,
