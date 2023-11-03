@@ -30,7 +30,7 @@ const estados = [
 
 const Fields = [
   {
-    section: "* Informações Pessoais",
+    section: "Informações Pessoais *",
     fields: [
       {
         id: "primeiroNome",
@@ -72,6 +72,7 @@ const Fields = [
         id: "telefone",
         label: "Telefone para contato",
         type: "tel",
+        required: true,
         redux: "basicInfos",
       },
 
@@ -84,7 +85,7 @@ const Fields = [
     ],
   },
   {
-    section: "Endereço",
+    section: "Endereço *",
     fields: [
       {
         id: "cep",
@@ -137,7 +138,6 @@ const Fields = [
       {
         id: "complemento",
         label: "Complemento",
-        required: true,
 
         type: "text",
         redux: "basicInfos",

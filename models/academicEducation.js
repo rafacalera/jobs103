@@ -41,6 +41,8 @@ AcademicEducation.belongsTo(Aluno, {
   foreignKey: "alunoId",
 });
 
-AcademicEducation.hasMany(Aluno, {
+Aluno.hasMany(AcademicEducation, {
   foreignKey: "alunoId",
 });
+
+module.exports = AcademicEducation;

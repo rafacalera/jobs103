@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const database = require("../infra/db");
 const Aluno = require("./user");
 
-const ExtraCourse = database.define("cursoExtracurricular", {
+const ExtraCourses = database.define("cursoExtracurricular", {
   id: {
     type: Sequelize.BIGINT,
     autoIncrement: true,
@@ -36,11 +36,13 @@ const ExtraCourse = database.define("cursoExtracurricular", {
   },
 });
 
-ExtraCourse.belongsTo(Aluno, {
+ExtraCourses.belongsTo(Aluno, {
   constraint: true,
   foreignKey: "alunoId",
 });
 
-ExtraCourse.hasMany(Aluno, {
+Aluno.hasMany(ExtraCourses, {
   foreignKey: "alunoId",
 });
+
+module.exports = ExtraCourses;

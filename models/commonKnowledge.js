@@ -24,6 +24,8 @@ CommonKnowledge.belongsTo(Aluno, {
   foreignKey: "alunoId",
 });
 
-CommonKnowledge.hasMany(Aluno, {
+Aluno.hasMany(CommonKnowledge, {
   foreignKey: "alunoId",
 });
+
+module.exports = CommonKnowledge;

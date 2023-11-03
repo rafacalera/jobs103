@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const database = require("../infra/db");
 const Aluno = require("./user");
 
-const ProfissionalExpirience = database.define("experienciaProfissional", {
+const ProfessionalExpirience = database.define("experienciaProfissional", {
   id: {
     type: Sequelize.BIGINT,
     autoIncrement: true,
@@ -25,11 +25,13 @@ const ProfissionalExpirience = database.define("experienciaProfissional", {
   dataFim: Sequelize.DATEONLY,
 });
 
-ProfissionalExpirience.belongsTo(Aluno, {
+ProfessionalExpirience.belongsTo(Aluno, {
   constraint: true,
   foreignKey: "alunoId",
 });
 
-ProfissionalExpirience.hasMany(Aluno, {
+Aluno.hasMany(ProfessionalExpirience, {
   foreignKey: "alunoId",
 });
+
+module.exports = ProfessionalExpirience;

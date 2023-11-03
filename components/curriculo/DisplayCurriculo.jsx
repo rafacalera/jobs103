@@ -6,6 +6,7 @@ import { Button, Typography } from "@mui/material";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import { postDownload } from "../../helpers/handlers/handleDownloadClick";
 import { useSelector } from "react-redux";
+import { handleCurriculumSave } from "../../helpers/handlers/handleCurriculumSave";
 
 export default () => {
   const [exibirCurriculo, setExibirCurriculo] = useState(true);
@@ -38,6 +39,24 @@ export default () => {
             Currículo
           </Typography>
         </div>
+        <Button
+          variant="contained"
+          disabled={!button}
+          sx={{
+            width: "150px",
+            display: "flex",
+            justifyContent: "space-around",
+            marginRight: "50px",
+          }}
+          onClick={async () => {
+            setButton(false);
+            await handleCurriculumSave(currentCurriculum, currentUser);
+
+            setButton(true);
+          }}
+        >
+          Salvar
+        </Button>
         <Button
           variant="contained"
           disabled={!button}

@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const database = require("../infra/db");
 const Aluno = require("./user");
 
-const Language = database.define("idioma", {
+const Languages = database.define("idioma", {
   id: {
     type: Sequelize.BIGINT,
     autoIncrement: true,
@@ -23,11 +23,13 @@ const Language = database.define("idioma", {
   },
 });
 
-Language.belongsTo(Aluno, {
+Languages.belongsTo(Aluno, {
   constraint: true,
   foreignKey: "alunoId",
 });
 
-Language.hasMany(Aluno, {
+Aluno.hasMany(Languages, {
   foreignKey: "alunoId",
 });
+
+module.exports = Languages;
