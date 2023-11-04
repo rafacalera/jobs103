@@ -29,9 +29,12 @@ export default function getEffect(
         setLoading(false);
       })
       .catch((err) => {
-        if (err.response.data === "Token expired") router.push("/login");
-        dispatch(logoutUser());
-        console.error(err);
+        if (err.response.data === "Token expired") {
+          alert("Sua sessão expirou, faça login novamente");
+          dispatch(logoutUser());
+          router.push("/login");
+          return;
+        }
       });
   }
   if (currentCurriculum) setLoading(false);

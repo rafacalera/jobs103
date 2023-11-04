@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const database = require("../infra/db");
 const Aluno = require("./user");
 
-const AcademicEducation = database.define("formacaoAcademia", {
+const AcademicEducation = database.define("formacaoAcademica", {
   id: {
     type: Sequelize.BIGINT,
     autoIncrement: true,

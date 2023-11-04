@@ -13,7 +13,7 @@ const CommonKnowledge = database.define("conhecimentoComum", {
     type: Sequelize.BIGINT,
     allowNull: false,
   },
-  empresa: {
+  conhecimento: {
     type: Sequelize.TEXT,
     allowNull: false,
   },

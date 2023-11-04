@@ -5,10 +5,14 @@ import { useState } from "react";
 import { Button, Typography } from "@mui/material";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import { postDownload } from "../../helpers/handlers/handleDownloadClick";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleCurriculumSave } from "../../helpers/handlers/handleCurriculumSave";
+import { logoutUser } from "../../redux/user/actions";
+import { useRouter } from "next/router";
 
 export default () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [exibirCurriculo, setExibirCurriculo] = useState(true);
   const [button, setButton] = useState(true);
   const { currentCurriculum } = useSelector(
@@ -48,11 +52,18 @@ export default () => {
             justifyContent: "space-around",
             marginRight: "50px",
           }}
-          onClick={async () => {
+          onClick={() => {
             setButton(false);
-            await handleCurriculumSave(currentCurriculum, currentUser);
-
-            setButton(true);
+            handleCurriculumSave(
+              currentCurriculum,
+              currentUser,
+              dispatch,
+              logoutUser,
+              router,
+            );
+            setTimeout(() => {
+              setButton(true);
+            }, 5000);
           }}
         >
           Salvar
@@ -68,9 +79,16 @@ export default () => {
           }}
           onClick={async () => {
             setButton(false);
-            await postDownload(currentCurriculum, currentUser);
-
-            setButton(true);
+            await postDownload(
+              currentCurriculum,
+              currentUser,
+              dispatch,
+              logoutUser,
+              router,
+            );
+            setTimeout(() => {
+              setButton(true);
+            }, 5000);
           }}
         >
           Download

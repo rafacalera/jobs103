@@ -47,7 +47,7 @@ export async function saveData(req, res) {
       },
     }).catch((err) => {
       console.log("Error: ", err);
-      res.status(500).json({ error: "Internal server error" });
+      return res.status(500).json({ error: "Internal server error" });
     });
   }
   academicEducation?.items.forEach(async (item) => {
@@ -57,14 +57,137 @@ export async function saveData(req, res) {
       curso: item.curso,
       grauFormacao: item.grauFormacao,
       dataInicio: item.dataInicio,
-      dataFim: item.dataFim,
+      dataFim:
+        item.dataFim !== null && item.dataFim !== "YYYY-MM"
+          ? item.dataFim
+          : null,
       totalHoras: item.totalHoras,
     }).catch((err) => {
       console.log("Error: ", err);
-      res.status(500).json({ error: "Internal server error" });
+      return res.status(500).json({ error: "Internal server error" });
     });
   });
-  res.status(200).json({ success: true });
+
+  if (
+    await ExtraCourses.findAll({
+      where: {
+        alunoId: userId,
+      },
+    })
+  ) {
+    await ExtraCourses.destroy({
+      where: {
+        alunoId: userId,
+      },
+    }).catch((err) => {
+      console.log("Error: ", err);
+      return res.status(500).json({ error: "Internal server error" });
+    });
+  }
+  extraCourses?.items.forEach(async (item) => {
+    await ExtraCourses.create({
+      alunoId: userId,
+      instituicao: item.instituicao,
+      curso: item.curso,
+      tipo: item.tipo,
+      dataInicio: item.dataInicio,
+      dataFim:
+        item.dataFim !== null && item.dataFim !== "YYYY-MM"
+          ? item.dataFim
+          : null,
+      totalHoras: item.totalHoras,
+    }).catch((err) => {
+      console.log("Error: ", err);
+      return res.status(500).json({ error: "Internal server error" });
+    });
+  });
+
+  if (
+    await ProfessionalExpirience.findAll({
+      where: {
+        alunoId: userId,
+      },
+    })
+  ) {
+    await ProfessionalExpirience.destroy({
+      where: {
+        alunoId: userId,
+      },
+    }).catch((err) => {
+      console.log("Error: ", err);
+      return res.status(500).json({ error: "Internal server error" });
+    });
+  }
+  professionalExperience?.items.forEach(async (item) => {
+    await ProfessionalExpirience.create({
+      alunoId: userId,
+      empresa: item.empresa,
+      cargo: item.cargo,
+      descricao: item.descricao?.trim().length === 0 ? null : item.descricao,
+      dataInicio: item.dataInicio,
+      dataFim:
+        item.dataFim !== null && item.dataFim !== "YYYY-MM"
+          ? item.dataFim
+          : null,
+    }).catch((err) => {
+      console.log("Error: ", err);
+      return res.status(500).json({ error: "Internal server error" });
+    });
+  });
+
+  if (
+    await Languages.findAll({
+      where: {
+        alunoId: userId,
+      },
+    })
+  ) {
+    await Languages.destroy({
+      where: {
+        alunoId: userId,
+      },
+    }).catch((err) => {
+      console.log("Error: ", err);
+      return res.status(500).json({ error: "Internal server error" });
+    });
+  }
+  language?.items.forEach(async (item) => {
+    await Languages.create({
+      alunoId: userId,
+      idioma: item.idioma,
+      nivel: item.nivel,
+    }).catch((err) => {
+      console.log("Error: ", err);
+      return res.status(500).json({ error: "Internal server error" });
+    });
+  });
+
+  if (
+    await CommonKnowledge.findAll({
+      where: {
+        alunoId: userId,
+      },
+    })
+  ) {
+    await CommonKnowledge.destroy({
+      where: {
+        alunoId: userId,
+      },
+    }).catch((err) => {
+      console.log("Error: ", err);
+      return res.status(500).json({ error: "Internal server error" });
+    });
+  }
+  commonKnowledge?.items.forEach(async (item) => {
+    await CommonKnowledge.create({
+      alunoId: userId,
+      conhecimento: item.conhecimento,
+    }).catch((err) => {
+      console.log("Error: ", err);
+      return res.status(500).json({ error: "Internal server error" });
+    });
+  });
+  res.status(201).json({ success: true });
 }
 
 export default verifyJWT(saveData);

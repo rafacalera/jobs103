@@ -1,4 +1,3 @@
-import { Check } from "@mui/icons-material";
 import axios from "axios";
 import { checkRequiredFields } from "../checkRequiredFields";
 
@@ -12,6 +11,9 @@ export const postDownload = (
     professionalExperience,
   },
   currentUser,
+  dispatch,
+  logoutUser,
+  router,
 ) => {
   const data = {
     academicEducation: academicEducation,
@@ -21,7 +23,6 @@ export const postDownload = (
     language: language,
     professionalExperience: professionalExperience,
   };
-
   if (checkRequiredFields(basicInfos))
     axios
       .post("/api/curriculum/download", data, {
@@ -36,6 +37,12 @@ export const postDownload = (
         );
       })
       .catch((err) => {
+        if (err.response.data === "Token expired") {
+          alert("Sua sessão expirou, faça login novamente");
+          dispatch(logoutUser());
+          router.push("/login");
+          return;
+        }
         alert(
           "Ocorreu um erro ao gerar o currículo, tente novamente mais tarde",
         );

@@ -13,7 +13,7 @@ const Languages = database.define("idioma", {
     type: Sequelize.BIGINT,
     allowNull: false,
   },
-  linguagem: {
+  idioma: {
     type: Sequelize.STRING(255),
     allowNull: false,
   },
