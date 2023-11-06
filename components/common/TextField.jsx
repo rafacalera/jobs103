@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material";
+import useWindowDimensions from "./useWindowDimensions";
 
 const textFieldValue = (curriculum, field) => {
   const redux = curriculum[field.redux];
@@ -18,21 +19,24 @@ const textFieldValue = (curriculum, field) => {
   return "";
 };
 
-const TextFieldComponent = ({ key, field, value, onChange, error }) => (
-  <TextField
-    required={field.required}
-    error={error?.[field.redux]?.[field.id]?.length > 0 ? true : false}
-    key={key}
-    id={field.id}
-    label={field.label}
-    type={field.type}
-    variant="standard"
-    sx={field.id === "complemento" ? { minWidth: 300 } : { minWidth: 200 }}
-    value={value}
-    onChange={onChange}
-    helperText={error?.[field.redux]?.[field.id] ?? ""}
-    disabled={field.disabled}
-  />
-);
+const TextFieldComponent = ({ key, field, value, onChange, error }) => {
+  const { width } = useWindowDimensions();
+  return (
+    <TextField
+      required={field.required}
+      error={error?.[field.redux]?.[field.id]?.length > 0 ? true : false}
+      key={key}
+      id={field.id}
+      label={field.label}
+      type={field.type}
+      variant="standard"
+      sx={width < 465 ? { width: "150px" } : { width: "200px" }}
+      value={value}
+      onChange={onChange}
+      helperText={error?.[field.redux]?.[field.id] ?? ""}
+      disabled={field.disabled}
+    />
+  );
+};
 
 export { TextFieldComponent as TextField, textFieldValue };

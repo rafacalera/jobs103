@@ -20,7 +20,7 @@ export default () => {
   );
   const { currentUser } = useSelector((rootReducer) => rootReducer.userReducer);
   return (
-    <div className={styles.divConteudo}>
+    <div className={exibirCurriculo ? styles.divConteudo : styles.nonConteudo}>
       <div
         style={{
           display: "flex",
@@ -43,6 +43,14 @@ export default () => {
             Currículo
           </Typography>
         </div>
+      </div>
+      <div
+        className={styles.divCurriculo}
+        style={!exibirCurriculo ? { display: "none", height: "0px" } : {}}
+      >
+        <Campos />
+      </div>
+      <div className={styles.divButtons}>
         <Button
           variant="contained"
           disabled={!button}
@@ -50,7 +58,6 @@ export default () => {
             width: "150px",
             display: "flex",
             justifyContent: "space-around",
-            marginRight: "50px",
           }}
           onClick={() => {
             setButton(false);
@@ -75,7 +82,6 @@ export default () => {
             width: "150px",
             display: "flex",
             justifyContent: "space-around",
-            marginRight: "50px",
           }}
           onClick={async () => {
             setButton(false);
@@ -94,12 +100,6 @@ export default () => {
           Download
           <SaveAltIcon />
         </Button>
-      </div>
-      <div
-        className={styles.divCurriculo}
-        style={!exibirCurriculo ? { display: "none", height: "0px" } : {}}
-      >
-        <Campos />
       </div>
     </div>
   );

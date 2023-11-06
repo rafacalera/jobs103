@@ -73,6 +73,7 @@ export default ({
           <DatePicker
             required
             id="nascimento"
+            sx={{ width: "100%" }}
             label="Data de nascimento"
             name="nascimento"
             value={pessoal.nascimento}

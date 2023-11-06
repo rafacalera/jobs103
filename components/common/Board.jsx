@@ -34,25 +34,21 @@ const valueFrom = (curriculum, section, field) => {
 };
 
 const handleSizeChanges = (width, row, fields) => {
+  const traducao = {
+    BASIC_DEGREE: "Médio",
+    TECHNICAL_DEGREE: "Técnico",
+    COLLEGE_DEGREE: "Superior",
+    COURSE: "Curso",
+    LECTURE: "Palestra",
+  };
+
   const newFields = fields.filter(
     (f) =>
-      // f.id !== "dataInicio" &&
       f.id !== "dataFim" &&
-      f.id !== "grauFormacao" &&
-      f.id !== "tipo" &&
       f.id !== "nivel" &&
       f.id !== "descricao" &&
       f.id !== "totalHoras",
   );
-
-  if (width < 900 && row.instituicao) {
-    return (
-      <>
-        <ListItemText primary={row.instituicao} />
-        <ListItemText primary={row.curso} />
-      </>
-    );
-  }
 
   if (width < 900 && row.instituicao) {
     return (
@@ -71,7 +67,9 @@ const handleSizeChanges = (width, row, fields) => {
       </>
     );
   }
-  return newFields.map((f) => <ListItemText primary={row[f.id]} />);
+  return newFields.map((f) => (
+    <ListItemText primary={traducao[row[f.id]] ?? row[f.id]} />
+  ));
 };
 
 const BoardComponent = ({ fieldSection, fieldName }) => {

@@ -8,6 +8,16 @@
   padding-bottom: 50px;
 }
 
+.nonConteudo {
+  padding: 0;
+  margin: 0;
+  margin-top: 25px;
+  width: 66%;
+  background-color: white;
+  border-radius: 25px;
+  padding-bottom: 16px;
+}
+
 .divTitle {
   background-color: white;
   display: flex;
@@ -28,10 +38,21 @@
   align-items: center;
 }
 
+.divButtons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 @media (max-width: 710px) {
   .divConteudo {
     padding: 0;
     padding-bottom: 50px;
+    width: 100%;
+  }
+  .nonConteudo {
+    padding: 0;
+    padding-bottom: 16px;
     width: 100%;
   }
 }

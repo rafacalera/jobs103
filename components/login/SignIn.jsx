@@ -125,7 +125,7 @@ export default function SignIn(props) {
             </Grid>
             <Grid item>
               <Link href="/cadastro" variant="body2">
-                {"Não possui uma conta? Cadastre-se"}
+                {"Cadastre-se por aqui"}
               </Link>
             </Grid>
           </Grid>
