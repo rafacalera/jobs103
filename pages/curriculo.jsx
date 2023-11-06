@@ -8,8 +8,8 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/user/actions";
 import { addCurriculum } from "../redux/curriculum/actions";
-import { CircularProgress } from "@mui/material";
 import getEffect from "../helpers/getEffect";
+import { Loading } from "../components/common/Loading";
 
 export default () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,16 +51,7 @@ export default () => {
           </main>
         </>
       ) : (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-          }}
-        >
-          <CircularProgress color="primary" />
-        </div>
+        <Loading />
       )}
       <Footer menuController={menuController} />
     </>
