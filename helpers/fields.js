@@ -78,7 +78,7 @@ const Fields = [
 
       {
         id: "nascidoEm",
-        label: "Cidadade natal",
+        label: "Cidade natal",
         required: true,
         redux: "basicInfos",
       },
