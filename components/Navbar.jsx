@@ -52,7 +52,7 @@ export default (props) => {
               <div>
                 <ul className={styles.navCenterLinks}>
                   <li>
-                    <Link href="#">Home</Link>
+                    <Link href="/">Home</Link>
                   </li>
                   <li>
                     <Link href="/curriculo">Currículo</Link>
