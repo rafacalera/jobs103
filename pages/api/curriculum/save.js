@@ -60,7 +60,7 @@ export async function saveData(req, res) {
       dataFim:
         item.dataFim !== null &&
         item.dataFim !== "YYYY-MM" &&
-        item.dataFim.length > 0
+        item.dataFim?.length > 0
           ? item.dataFim
           : null,
       totalHoras: item.totalHoras,
@@ -96,7 +96,7 @@ export async function saveData(req, res) {
       dataFim:
         item.dataFim !== null &&
         item.dataFim !== "YYYY-MM" &&
-        item.dataFim.length > 0
+        item.dataFim?.length > 0
           ? item.dataFim
           : null,
       totalHoras: item.totalHoras,
@@ -132,7 +132,7 @@ export async function saveData(req, res) {
       dataFim:
         item.dataFim !== null &&
         item.dataFim !== "YYYY-MM" &&
-        item.dataFim.length > 0
+        item.dataFim?.length > 0
           ? item.dataFim
           : null,
     }).catch((err) => {
