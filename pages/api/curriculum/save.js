@@ -58,7 +58,9 @@ export async function saveData(req, res) {
       grauFormacao: item.grauFormacao,
       dataInicio: item.dataInicio,
       dataFim:
-        item.dataFim !== null && item.dataFim !== "YYYY-MM"
+        item.dataFim !== null &&
+        item.dataFim !== "YYYY-MM" &&
+        item.dataFim.length > 0
           ? item.dataFim
           : null,
       totalHoras: item.totalHoras,
@@ -92,7 +94,9 @@ export async function saveData(req, res) {
       tipo: item.tipo,
       dataInicio: item.dataInicio,
       dataFim:
-        item.dataFim !== null && item.dataFim !== "YYYY-MM"
+        item.dataFim !== null &&
+        item.dataFim !== "YYYY-MM" &&
+        item.dataFim.length > 0
           ? item.dataFim
           : null,
       totalHoras: item.totalHoras,
@@ -126,7 +130,9 @@ export async function saveData(req, res) {
       descricao: item.descricao?.trim().length === 0 ? null : item.descricao,
       dataInicio: item.dataInicio,
       dataFim:
-        item.dataFim !== null && item.dataFim !== "YYYY-MM"
+        item.dataFim !== null &&
+        item.dataFim !== "YYYY-MM" &&
+        item.dataFim.length > 0
           ? item.dataFim
           : null,
     }).catch((err) => {
