@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import sylvinho from "../../public/sylvinho fundo.png";
 import styles from "../../styles/Main.module.css";
+import Link from "next/link";
 
 export default (props) => {
   return (
@@ -12,9 +13,14 @@ export default (props) => {
       >
         <div>
           <h1>
-            <span>Ache seu</span>{" "}
-            <span style={{ color: "#2C4ECA", fontWeight: "700px" }}>
-              Emprego
+            <span>Cadastre seu</span>{" "}
+            <span>
+              <Link
+                href="/curriculo"
+                style={{ color: "#2C4ECA", fontWeight: "700px" }}
+              >
+                Currículo
+              </Link>
             </span>
             <span> aqui</span>
           </h1>
