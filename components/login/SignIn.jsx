@@ -14,8 +14,12 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import handleLogin from "../../helpers/handlers/handleLogin";
+import { useSelector } from "react-redux";
 
 export default function SignIn(props) {
+  const { currentCurriculum } = useSelector(
+    (rootReducer) => rootReducer.curriculumReducer,
+  );
   const [isDisabled, setIsDisabled] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -61,6 +65,7 @@ export default function SignIn(props) {
               router,
               dispatch,
               setIsDisabled,
+              currentCurriculum,
             )
           }
           noValidate
@@ -118,11 +123,11 @@ export default function SignIn(props) {
             Entrar
           </Button>
           <Grid container>
-            <Grid item xs>
+            {/* <Grid item xs>
               <Link href="/recuperar-senha" variant="body2">
                 Recuperar senha
               </Link>
-            </Grid>
+            </Grid> */}
             <Grid item>
               <Link href="/cadastro" variant="body2">
                 {"Cadastre-se por aqui"}
