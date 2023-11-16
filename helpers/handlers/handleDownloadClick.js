@@ -35,6 +35,7 @@ export const postDownload = (
           response.data.base64,
           `Curriculo do ${basicInfos.nome}.pdf`,
         );
+        alert("Currículo gerado com sucesso");
       })
       .catch((err) => {
         if (err.response.data === "Token expired") {

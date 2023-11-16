@@ -15,6 +15,7 @@ export default () => {
   const dispatch = useDispatch();
   const [exibirCurriculo, setExibirCurriculo] = useState(true);
   const [button, setButton] = useState(true);
+  const [button2, setButton2] = useState(true);
   const { currentCurriculum } = useSelector(
     (rootReducer) => rootReducer.curriculumReducer,
   );
@@ -77,14 +78,14 @@ export default () => {
         </Button>
         <Button
           variant="contained"
-          disabled={!button}
+          disabled={!button2}
           sx={{
             width: "150px",
             display: "flex",
             justifyContent: "space-around",
           }}
           onClick={async () => {
-            setButton(false);
+            setButton2(false);
             await postDownload(
               currentCurriculum,
               currentUser,
@@ -93,7 +94,7 @@ export default () => {
               router,
             );
             setTimeout(() => {
-              setButton(true);
+              setButton2(true);
             }, 5000);
           }}
         >
