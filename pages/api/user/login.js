@@ -14,14 +14,14 @@ export default async function postLogin(req, res) {
     });
 
     if (!usuario) {
-      res.status(401).json({ error: "email" });
+      res.status(401).json({ auth: "false" });
       return;
     }
 
     const senhaCoincide = await bcrypt.compare(req.body.senha, usuario.senha);
 
     if (!senhaCoincide) {
-      res.status(401).json({ error: "senha" });
+      res.status(401).json({ auth: "false" });
       return;
     }
 

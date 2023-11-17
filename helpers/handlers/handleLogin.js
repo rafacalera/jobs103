@@ -49,9 +49,9 @@ function handleLogin(
       router.push("/curriculo");
     })
     .catch((err) => {
+      if (err.response.data.auth === "false")
+        alert("E-mail ou senha está incorreto");
       console.log(err);
-      if (err.response.data.error === "email") alert("E-mail não confere");
-      else if (err.response.data.error === "senha") alert("Senha não confere");
       setIsDisabled(false);
     });
 }
